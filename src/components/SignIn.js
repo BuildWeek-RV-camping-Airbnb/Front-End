@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import Logo from '../assets/Logo'
+
+// Utilites
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 // Material UI
 import Avatar from '@material-ui/core/Avatar';
@@ -17,6 +20,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
 
 function Copyright() {
   return (
@@ -67,8 +71,29 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+const SignIn = props => {
   const classes = useStyles();
+
+  const [user, setUser] = useState({
+    username: '',
+    password: ''
+  });
+
+  const handleChanges = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const signIn = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/api/users', user)
+      .then(res => {
+        console.log(res.data);
+        localStorage.setItem('token', res.data.payload);
+        props.history.push('/');
+      })
+      .catch(err => console.log(err.response));
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -88,10 +113,11 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              onChange={handleChanges}
               autoFocus
             />
             <TextField
@@ -104,6 +130,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChanges}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -115,6 +142,8 @@ export default function SignIn() {
               variant="contained"
               color='primary'
               className={classes.submit}
+              onChange={handleChanges}
+              onClick={signIn}
             >
               Sign In
             </Button>
@@ -139,3 +168,5 @@ export default function SignIn() {
     </Grid>
   );
 }
+
+export default SignIn;
