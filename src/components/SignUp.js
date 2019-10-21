@@ -17,6 +17,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Box from '@material-ui/core/Box';
 
 function Copyright() {
   return (
@@ -71,11 +72,7 @@ export default function SignIn() {
 
   const inputLabel = React.useRef(null);
 
-
-  const [values, setValues] = React.useState({
-    age: '',
-    name: 'hai',
-  });
+  const [values, setValues] = React.useState({});
 
   const handleChange = event => {
     setValues(oldValues => ({
@@ -195,9 +192,11 @@ export default function SignIn() {
               </Link>
             </Grid>
           </Grid>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
           </form>
         </div>
-        <Copyright />
       </Grid>
     </Grid>
   );
