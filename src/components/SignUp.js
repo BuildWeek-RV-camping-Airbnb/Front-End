@@ -1,18 +1,22 @@
 import React from 'react';
 
+// Components
+import Logo from '../assets/Logo';
+
 // Material UI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 function Copyright() {
   return (
@@ -27,7 +31,10 @@ function Copyright() {
   );
 }
 
+
+
 const useStyles = makeStyles(theme => ({
+
   root: {
     height: '100vh'
   },
@@ -51,6 +58,9 @@ const useStyles = makeStyles(theme => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1)
   },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
   submit: {
     margin: theme.spacing(3, 0, 2)
   }
@@ -59,6 +69,21 @@ const useStyles = makeStyles(theme => ({
 export default function SignIn() {
   const classes = useStyles();
 
+  const inputLabel = React.useRef(null);
+
+
+  const [values, setValues] = React.useState({
+    age: '',
+    name: 'hai',
+  });
+
+  const handleChange = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -66,7 +91,7 @@ export default function SignIn() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <Logo />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -112,6 +137,18 @@ export default function SignIn() {
                 variant="outlined"
                 required
                 fullWidth
+                name="username"
+                label="Username"
+                type="username"
+                id="username"
+                autoComplete="current-password"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
                 name="password"
                 label="Password"
                 type="password"
@@ -120,10 +157,26 @@ export default function SignIn() {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
+              <FormControl variant="outlined" fullWidth="true">
+                <InputLabel ref={inputLabel} htmlFor="outlined-category-simple">
+                  I am a ...
+                </InputLabel>
+                <Select
+                  value={values.category}
+                  onChange={handleChange}
+                  // labelWidth={classes.form}
+                  inputProps={{
+                    name: 'category',
+                    id: 'outlined-category-simple',
+                  }}
+                >
+                  <MenuItem value="">
+                    <em>Select</em>
+                  </MenuItem>
+                  <MenuItem value={10}>RV Owner</MenuItem>
+                  <MenuItem value={20}>Landowner</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
           <Button
@@ -144,7 +197,15 @@ export default function SignIn() {
           </Grid>
           </form>
         </div>
+        <Copyright />
       </Grid>
     </Grid>
   );
 }
+
+
+
+
+
+
+
