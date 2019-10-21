@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Components
+import Logo from '../assets/Logo'
+
 // Material UI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -20,7 +23,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        RVnB
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -44,6 +47,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center'
   },
+  typography: {
+    fontSize: 24
+  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main
@@ -53,8 +59,12 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#034AA6',
+    '&:hover': {
+      backgroundColor: '#f26e22'
+    }
+  },
 }));
 
 export default function SignIn() {
@@ -67,9 +77,9 @@ export default function SignIn() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <Logo />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography className={classes.typography} component="h1" variant="h5">
             Sign in
           </Typography>
           <form className={classes.form} noValidate>
@@ -103,7 +113,7 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color='primary'
               className={classes.submit}
             >
               Sign In
