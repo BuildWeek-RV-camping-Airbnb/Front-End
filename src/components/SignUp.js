@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Components
+import Logo from '../assets/Logo';
+
 // Material UI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -66,7 +69,7 @@ export default function SignIn() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
+            <Logo />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up

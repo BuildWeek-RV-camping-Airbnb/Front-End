@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import Logo from '../assets/Logo'
+import Logo from '../assets/Logo';
 
 // Material UI
 import Avatar from '@material-ui/core/Avatar';
