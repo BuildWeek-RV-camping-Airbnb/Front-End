@@ -12,7 +12,7 @@ import {
   Icons as IconsView,
   Account as AccountView,
   Settings as SettingsView,
-} from './views';
+} from './components/Dashboard/Dashboard Items';
 
 
 

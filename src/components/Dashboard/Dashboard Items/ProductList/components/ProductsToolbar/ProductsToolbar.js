@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 
-import { SearchInput } from '../../../../components';
+import { SearchInput } from '../../../../../../components';
 
 const useStyles = makeStyles(theme => ({
   root: {},

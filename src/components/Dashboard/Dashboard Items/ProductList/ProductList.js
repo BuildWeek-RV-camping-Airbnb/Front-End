@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+
+// Redux
+import { connect } from 'react-redux'
+
+// Actions
+import { getUser, getLocations, postUser, postProperty, editProperty, deleteProperty } from '../../../../actions'
+
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-import { ProductsToolbar, ProductCard } from './components';
+import { ProductsToolbar, PropertyCard } from './components';
 import mockData from './data';
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +50,7 @@ const LocationsList = props => {
               md={6}
               xs={12}
             >
-              <ProductCard product={product} />
+              <PropertyCard product={product} />
             </Grid>
           ))}
         </Grid>
