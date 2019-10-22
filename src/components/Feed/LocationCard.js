@@ -11,8 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 // Components 
-import Heart from 'src/assets/icons/Heart.svg';
-import Star from 'src/assets/icons/Star.svg';
+import Heart from '../../assets/icons/Heart.svg';
+import Star from '../../assets/icons/Star.svg';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   header: {
     zIndex: 9,
-    backgroundColor: rgba(0,0,0,0)
+    backgroundColor: 'rgba(0,0,0,0)'
   },
   media: {
     height: 0,
@@ -50,7 +50,7 @@ const LocationCard = (props) => {
       <CardMedia
         className={classes.media}
         image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
-        title={props.name}
+        title={props.propertyName}
       />
       <CardContent className={classes.content}>
         <Typography variant="body2" align="left" color="textSecondary" component="p">
