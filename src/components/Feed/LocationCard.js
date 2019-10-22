@@ -9,28 +9,33 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+
+// Components 
 import Heart from 'src/assets/icons/Heart.svg';
 import Star from 'src/assets/icons/Star.svg';
-
 
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345,
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
   },
   header: {
     zIndex: 9,
-    backgroundColor: 'none'
+    backgroundColor: rgba(0,0,0,0)
   },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
   content: {
-
+    // flexGrow: 1,
   }
 }));
 
-const LocationCard = () => {
+
+const LocationCard = (props) => {
   const classes = useStyles();
 
   return (
@@ -46,25 +51,21 @@ const LocationCard = () => {
         className={classes.media}
         image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
         title={props.name}
-
       />
       <CardContent className={classes.content}>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" align="left" color="textSecondary" component="p">
           {props.city}, {props.state}       
         </Typography>
-        <CardContent>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" align="left" component="h3">
             {props.propertyName}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" align="left" color="textSecondary" component="p">
             {props.price}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="span">
             <Star />
             {props.rating}
           </Typography>
-        </CardContent>
-
       </CardContent>
     </Card>
   );
