@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+
+// Material UI
 import { makeStyles, fade } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 
+// Assets
 import RvLogo from '../../../../assets/RvLogo';
 
 const useStyles = makeStyles(theme => ({
@@ -85,19 +88,6 @@ const Topbar = props => {
         <RouterLink to="/">
           <RvLogo />
         </RouterLink>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </div>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
           <Button color="inherit">Home</Button>
