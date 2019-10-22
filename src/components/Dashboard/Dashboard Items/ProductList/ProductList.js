@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductList = () => {
+const LocationsList = props => {
   const classes = useStyles();
 
   const [products] = useState(mockData);
@@ -61,4 +61,22 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+const mapStateToProps = state => {
+  return {
+    properties: state.properties,
+    isFetching: state.isFetching,
+    isPosting: state.isPosting,
+    isUpdating: state.isUpdating,
+    isDeleting: state.isDeleting,
+    error: state.error
+  };
+};
+
+export default connect(mapStateToProps, 
+  { 
+    getUser, 
+    getLocations,
+    postProperty,
+    editProperty,
+    deleteProperty
+   }) (LocationsList);

@@ -1,6 +1,6 @@
 import {
     START_UPDATE,
-    UPDATE_SUCCESS,
+    UPDATE_SUCCESSFUL,
     UPDATE_FAILURE,
     START_DELETE,
     DELETE_SUCCESSFUL,
@@ -22,7 +22,7 @@ import {
           isUpdating: true,
           error: ''
         };
-      case UPDATE_SUCCESS:
+      case UPDATE_SUCCESSFUL:
         return {
           ...state,
           isUpdating: false,
