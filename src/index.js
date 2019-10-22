@@ -8,9 +8,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import rootReducer from './reducers';
+import combineReducer from './reducers';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(combineReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>

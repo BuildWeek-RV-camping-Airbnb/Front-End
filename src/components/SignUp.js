@@ -72,6 +72,7 @@ const SignUp = props => {
 
   const inputLabel = React.useRef(null);
 
+  const [values, setValues] = useState('');
   const [user, setUser] = useState({
     username: '',
     password: ''
@@ -171,7 +172,7 @@ const SignUp = props => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl variant="outlined" fullWidth="true">
+                <FormControl variant="outlined">
                   <InputLabel
                     ref={inputLabel}
                     htmlFor="outlined-category-simple"
@@ -179,7 +180,7 @@ const SignUp = props => {
                     I am a ...
                   </InputLabel>
                   <Select
-                    // value={values.category}
+                    value={values.category}
                     onChange={handleChanges}
                     // labelWidth={classes.form}
                     inputProps={{
@@ -190,8 +191,8 @@ const SignUp = props => {
                     <MenuItem value="">
                       <em>Select</em>
                     </MenuItem>
-                    <MenuItem value={10}>RV Owner</MenuItem>
-                    <MenuItem value={20}>Landowner</MenuItem>
+                    <MenuItem value={false}>RV Owner</MenuItem>
+                    <MenuItem value={true}>Landowner</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
