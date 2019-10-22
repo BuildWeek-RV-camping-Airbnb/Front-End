@@ -9,7 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import Heart from 'src/assets/icons/Heart.svg';
+import Star from 'src/assets/icons/Star.svg';
 
 
 const useStyles = makeStyles(theme => ({
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LocationsCard = () => {
+const LocationCard = () => {
   const classes = useStyles();
 
   return (
@@ -37,25 +38,30 @@ const LocationsCard = () => {
       <CardHeader className={classes.header}>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <Heart />
           </IconButton>
         </CardActions>
       </CardHeader>
       <CardMedia
         className={classes.media}
         image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
-        title="Paella dish"
+        title={props.name}
+
       />
       <CardContent className={classes.content}>
         <Typography variant="body2" color="textSecondary" component="p">
-          Campsite        
+          {props.city}, {props.state}       
         </Typography>
         <CardContent>
           <Typography variant="h5" component="h2">
-            Mountain View
+            {props.propertyName}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            $27 per night
+            {props.price}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="span">
+            <Star />
+            {props.rating}
           </Typography>
         </CardContent>
 
@@ -64,4 +70,4 @@ const LocationsCard = () => {
   );
 }
 
-export default LocationsCard;
+export default LocationCard;
