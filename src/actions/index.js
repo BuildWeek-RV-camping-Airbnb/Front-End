@@ -24,37 +24,19 @@ export const DELETE_FAILURE = 'DELETE_FAILURE';
 
 // action creators
 export const getUser = () => {
-  const [user, setUser] = useState([]);
-
   dispatchEvent({ type: START_FETCHING });
-  useEffect(() => {
-    axiosWithAuth
-      .get(`/api/users`)
-      .then(response => {
-        console.log(response);
-        setUser(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, [id]);
+  axiosWithAuth
+    .get(`/api/users`)
+    .then(res => dispatchEvent({ type: FETCH_SUCCESS, payload: res.data }))
+    .catch(err => dispatchEvent({ type: FETCH_FAILURE, payload: err.response}));
 };
 
 export const getProperties = () => {
   dispatchEvent({ type: START_FETCHING });
-  const [property, setProperty] = useState([]);
-
-  useEffect(() => {
-    axiosWithAuth
-      .get(`/api/properties`)
-      .then(response => {
-        console.log(response);
-        setProperty(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, [id]);
+  axiosWithAuth
+    .get(`/api/properties`)
+    .then(res => dispatchEvent({ type: FETCH_SUCCESS, payload: res.data }))
+    .catch(err => dispatchEvent({ type: FETCH_FAILURE, payload: err.response}));
 };
 
 export const postUser = newUser => {
