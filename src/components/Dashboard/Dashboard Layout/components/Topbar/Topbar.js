@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 // Material UI
 import { makeStyles, fade } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 
 // Assets
