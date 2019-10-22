@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import Logo from '../assets/Logo';
+
+// Utilities
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 // Material UI
 import Avatar from '@material-ui/core/Avatar';
@@ -64,8 +67,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
+const SignUp = props => {
   const classes = useStyles();
+
+  const inputLabel = React.useRef(null);
 
   const [user, setUser] = useState({
     username: '',
@@ -174,7 +179,7 @@ export default function SignIn() {
                     I am a ...
                   </InputLabel>
                   <Select
-                    value={values.category}
+                    // value={values.category}
                     onChange={handleChanges}
                     // labelWidth={classes.form}
                     inputProps={{
@@ -217,3 +222,5 @@ export default function SignIn() {
     </Grid>
   );
 }
+
+export default SignUp;
