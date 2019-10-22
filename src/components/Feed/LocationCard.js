@@ -9,7 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Heart from 'src/assets/icons/Heart.svg';
+import Star from 'src/assets/icons/Star.svg';
 
 
 const useStyles = makeStyles(theme => ({
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LocationsCard = () => {
+const LocationCard = () => {
   const classes = useStyles();
 
   return (
@@ -37,7 +38,8 @@ const LocationsCard = () => {
       <CardHeader className={classes.header}>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-          <FontAwesomeIcon icon="heart" />          </IconButton>
+            <Heart />
+          </IconButton>
         </CardActions>
       </CardHeader>
       <CardMedia
@@ -57,8 +59,8 @@ const LocationsCard = () => {
           <Typography variant="body2" color="textSecondary" component="p">
             {props.price}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            <FontAwesomeIcon icon="star" />
+          <Typography variant="body2" color="textSecondary" component="span">
+            <Star />
             {props.rating}
           </Typography>
         </CardContent>
@@ -68,4 +70,4 @@ const LocationsCard = () => {
   );
 }
 
-export default LocationsCard;
+export default LocationCard;
