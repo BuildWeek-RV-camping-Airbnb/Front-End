@@ -14,6 +14,8 @@ import {
   Settings as SettingsView,
 } from './views';
 
+
+
 const Routes = () => {
   return (
     <Switch>
