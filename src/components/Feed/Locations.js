@@ -19,7 +19,7 @@ const LocationsGrid = props => {
 
   return (
     <Grid container className={classes.root} justify="center">
-      {props. XYZ.map(item => {
+      {props.XYZ.map(item => {
         return (
           <Grid item className={classes.gridItem} s>
             <LocationCard 
@@ -38,7 +38,6 @@ const LocationsGrid = props => {
     </Grid>
   );
 }
-
 
 export default LocationsGrid;
 
