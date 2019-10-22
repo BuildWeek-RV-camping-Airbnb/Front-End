@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 
 // Assets
-import RvLogo from '../../../../assets/RvLogo';
+import RvLogo from '../../../../../assets/RvLogo';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,7 +77,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Navbar = props => {
+const Topbar = props => {
   const { className, onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
@@ -88,22 +88,8 @@ const Navbar = props => {
         <RouterLink to="/">
           <RvLogo />
         </RouterLink>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </div>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
-          <Button color="inherit">Home</Button>
           <Button color="inherit">Sign out</Button>
         </div>
       </Toolbar>
@@ -116,4 +102,4 @@ Topbar.propTypes = {
   onSidebarOpen: PropTypes.func
 };
 
-export default Navbar;
+export default Topbar;
