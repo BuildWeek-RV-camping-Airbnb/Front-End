@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Components
 import Logo from '../assets/Logo';
+
+// Utilites
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 // Material UI
 import Avatar from '@material-ui/core/Avatar';
@@ -63,11 +66,32 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#f26e22'
     }
-  },
+  }
 }));
 
-export default function SignIn() {
+const SignIn = props => {
   const classes = useStyles();
+
+  const [user, setUser] = useState({
+    username: '',
+    password: ''
+  });
+
+  const handleChanges = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const signIn = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/api/login', user)
+      .then(res => {
+        console.log(res.data);
+        localStorage.setItem('token', res.data.payload);
+        props.history.push('/');
+      })
+      .catch(err => console.log(err.response));
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -78,7 +102,11 @@ export default function SignIn() {
           <Avatar className={classes.avatar}>
             <Logo />
           </Avatar>
-          <Typography className={classes.typography} component="h1" variant="h5">
+          <Typography
+            className={classes.typography}
+            component="h1"
+            variant="h5"
+          >
             Sign in
           </Typography>
           <form className={classes.form} noValidate>
@@ -87,10 +115,11 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              onChange={handleChanges}
               autoFocus
             />
             <TextField
@@ -103,6 +132,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChanges}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -112,8 +142,10 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              color='primary'
+              color="primary"
               className={classes.submit}
+              onChange={handleChanges}
+              onClick={signIn}
             >
               Sign In
             </Button>
@@ -137,4 +169,6 @@ export default function SignIn() {
       </Grid>
     </Grid>
   );
-}
+};
+
+export default SignIn;
