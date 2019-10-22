@@ -31,30 +31,30 @@ const useStyles = makeStyles(theme => ({
 
 const PropertyList = props => {
   const classes = useStyles();
-
+  console.log('props...', props)
   useEffect(() => {
-    if (props.properties.length === 0) {
+    
       props.getProperties();
-    }
+      console.log(props)
   })
 
   return (
     <div className={classes.root}>
-      <ProductsToolbar />
+      {/* <ProductsToolbar /> */}
       <div className={classes.content}>
         <Grid
           container
           spacing={3}
         >
-          {properties.map(product => (
+          {props.properties && props.properties.map(property => (
             <Grid
               item
-              key={product.id}
+              key={property.id}
               lg={4}
               md={6}
               xs={12}
             >
-              <PropertyCard product={product} />
+              <PropertyCard properties={props.properties} />
             </Grid>
           ))}
         </Grid>

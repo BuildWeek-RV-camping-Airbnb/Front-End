@@ -1,85 +1,110 @@
-import React from 'react';
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 
-// Material UI 
-import Typography from '@material-ui/core/Typography';
+// Material UI
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography';
 
-// Components 
+
+// Components
+import LocationCard from './LocationCard';
+import Navbar from '../../components/Navbar'
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        RVnB
-      </Link>{' '}
-        2019
-    </Typography>
-  );
-}
+import { getUser, getProperties, postUser, postProperty, editProperty, deleteProperty } from '../../actions'
 
 const useStyles = makeStyles(theme => ({
-  icon: {
-    marginRight: theme.spacing(2),
-  },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
+    root: {
+        margin: '75px auto'
+      },
+    gridItem: {
+        padding: theme.spacing(2)
+      },
+  }));
 
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-  },
-}));
-
-export default function Feed() {
+const Feed = props => { 
   const classes = useStyles();
+  // const topRated = props.location.filter(stars => stars.rating >= 4.8);
+
+  useEffect(() => {
+    props.getProperties()
+  }, [])
 
   return (
-    <div className="Feed">
+    <>
+    <Navbar />
+    <Container className={classes.cardGrid} maxWidth="md">
+        <Typography variant="h5" align="left" component="h2">
+          Top-Rated Locations
+        </Typography>
+        <Typography variant="body2" align="left" color="textSecondary" component="p">
+          Explore some of the best-reveiwed stays in the world
+        </Typography>
+      {/* <Grid container spacing={4}>      
+        {topRated.map(item => {
+          return (
+            <Grid item className={classes.gridItem} s>
+              <LocationCard 
+                key={item.id} 
+                propertyName={item.property_name}
+                address={item.address}
+                city={item.city}
+                state={item.state}
+                price={item.price}
+                rating={item.rating}
+                ownerId={item.owner_id}
+                />
+            </Grid>
+          );
+        })}
+      </Grid> */}
+    </Container>
 
-      {/* <Topbar / NavBar /> */}
-
-
-      <main>
-
-      {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="left" color="textPrimary" gutterBottom>
-              Album layout
-            </Typography>
-            <Typography variant="h5" align="left" color="textSecondary" paragraph>
-              Something short and leading about the collection below—its contents, the creator, etc.
-              Make it short and sweet, but not too short so folks don&apos;t simply skip over it
-              entirely.
-            </Typography>
-          </Container>
-        </div>
-      {/* End hero unit */}
-
-      {/* Cards unit */}
-        <Container className={classes.cardGrid} maxWidth="md">
-          <Locations/>
-        </Container>
-      {/* End Cards unit */}
-
-      </main>
-
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Copyright />
-      </footer>
-      {/* End footer */}
-
-    </div>
-  );
+    <Container className={classes.cardGrid} maxWidth="md">
+      <Typography variant="h5" align="left" component="h2">
+        20+ places to stay
+      </Typography>
+      <Grid container spacing={4}>    
+        {props.error && <p>{props.error}</p>}  
+        {props.properties && props.properties.map(item => {
+          return (
+            <Grid item className={classes.gridItem} s>
+              <LocationCard 
+                key={item.id} 
+                propertyName={item.property_name}
+                address={item.address}
+                city={item.city}
+                state={item.state}
+                price={item.price}
+                rating={item.rating}
+                ownerId={item.owner_id}
+                />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Container>
+    </>
+  )
 }
+const mapStateToProps = state => {
+  return {
+    properties: state.properties,
+    isFetching: state.isFetching,
+    isPosting: state.isPosting,
+    isUpdating: state.isUpdating,
+    isDeleting: state.isDeleting,
+    error: state.error
+  };
+};
+
+export default connect(mapStateToProps, 
+  { 
+    getUser, 
+    getProperties,
+    postProperty,
+    editProperty,
+    deleteProperty
+   }) (Feed);

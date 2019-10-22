@@ -3,6 +3,7 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 
 import { RouteWithLayout, SignIn, SignUp } from './components';
 import { Main as MainLayout } from './components/Dashboard';
+import Feed from './components/Feed/Feed'
 
 
 import {
@@ -69,6 +70,11 @@ const Routes = () => {
         component={SignUp}
         exact
         path='/signup'
+      />
+      <Route
+        component={Feed}
+        exact
+        patch='/feed'
       />
       <Redirect to="/not-found" />
     </Switch>
