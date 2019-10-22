@@ -27,7 +27,7 @@ export const getUser = () => {
   // AXIOS GET REQUEST - Hysen
 };
 
-export const getLocation = () => {
+export const getProperties = () => {
   dispatchEvent({ type: START_FETCHING });
   // AXIOS GET REQUEST - Hysen
 };

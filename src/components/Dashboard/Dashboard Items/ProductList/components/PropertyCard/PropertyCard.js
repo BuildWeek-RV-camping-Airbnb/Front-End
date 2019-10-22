@@ -39,8 +39,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductCard = props => {
-  const { className, product, ...rest } = props;
+const PropertyCard = props => {
+  const { className, properties, ...rest } = props;
 
   const classes = useStyles();
 
@@ -54,7 +54,7 @@ const ProductCard = props => {
           <img
             alt="Product"
             className={classes.image}
-            src={product.imageUrl}
+            // src={props.imageUrl}
           />
         </div>
         <Typography
@@ -62,13 +62,13 @@ const ProductCard = props => {
           gutterBottom
           variant="h4"
         >
-          {product.title}
+          {props.property_name}
         </Typography>
         <Typography
           align="center"
           variant="body1"
         >
-          {product.description}
+          {props.description}
         </Typography>
       </CardContent>
       <Divider />
@@ -98,7 +98,7 @@ const ProductCard = props => {
               display="inline"
               variant="body2"
             >
-              {product.totalDownloads} Downloads
+              {props.totalDownloads} Downloads
             </Typography>
           </Grid>
         </Grid>
@@ -107,9 +107,9 @@ const ProductCard = props => {
   );
 };
 
-ProductCard.propTypes = {
+PropertyCard.propTypes = {
   className: PropTypes.string,
   product: PropTypes.object.isRequired
 };
 
-export default ProductCard;
+export default PropertyCard;

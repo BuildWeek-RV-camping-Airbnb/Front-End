@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+// Redux
+import { connect } from 'react-redux'
+
+// Actions
+import { getUser, getProperties, postUser, postProperty, editProperty, deleteProperty } from '../../../../actions'
+
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-import { ProductsToolbar, ProductCard } from './components';
+import { ProductsToolbar, PropertyCard } from './components';
 import mockData from './data';
 
 const useStyles = makeStyles(theme => ({
@@ -22,10 +29,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProductList = () => {
+const PropertyList = props => {
   const classes = useStyles();
 
-  const [products] = useState(mockData);
+  useEffect(() => {
+    if (props.properties.length === 0) {
+      props.getProperties();
+    }
+  })
 
   return (
     <div className={classes.root}>
@@ -35,7 +46,7 @@ const ProductList = () => {
           container
           spacing={3}
         >
-          {products.map(product => (
+          {properties.map(product => (
             <Grid
               item
               key={product.id}
@@ -43,7 +54,7 @@ const ProductList = () => {
               md={6}
               xs={12}
             >
-              <ProductCard product={product} />
+              <PropertyCard product={product} />
             </Grid>
           ))}
         </Grid>
@@ -61,4 +72,22 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+const mapStateToProps = state => {
+  return {
+    properties: state.properties,
+    isFetching: state.isFetching,
+    isPosting: state.isPosting,
+    isUpdating: state.isUpdating,
+    isDeleting: state.isDeleting,
+    error: state.error
+  };
+};
+
+export default connect(mapStateToProps, 
+  { 
+    getUser, 
+    getProperties,
+    postProperty,
+    editProperty,
+    deleteProperty
+   }) (PropertyList);
