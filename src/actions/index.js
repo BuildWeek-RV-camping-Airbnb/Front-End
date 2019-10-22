@@ -1,4 +1,5 @@
 import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 
 // action types - GET requests
@@ -23,14 +24,38 @@ export const DELETE_FAILURE = 'DELETE_FAILURE';
 
 // action creators
 export const getUser = () => {
+  const [user, setUser] = useState([]);
+
   dispatchEvent({ type: START_FETCHING });
-  // AXIOS GET REQUEST - Hysen
-};
+  useEffect(() => {
+    axios
+    //WithAuth
+      .get(`http://localhost:5000/api/users/:id`)
+      .then(response => {
+        console.log(response);
+        setUser(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },[id]);};
 
 export const getProperties = () => {
   dispatchEvent({ type: START_FETCHING });
-  // AXIOS GET REQUEST - Hysen
-};
+  const [property, setProperty] = useState([]);
+
+  useEffect(() => {
+    axios
+    // WithAuth
+      .get(`http://localhost:5000/api/properties/:id`)
+      .then(response => {
+        console.log(response);
+        setProperty(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },[id]);};
 
 export const postUser = newUser => {
   dispatchEvent({ type: START_POST });
