@@ -54,7 +54,7 @@ const PropertyCard = props => {
           <img
             alt="Product"
             className={classes.image}
-            // src={props.properties.imageUrl}
+            // src={props.imageUrl}
           />
         </div>
         <Typography

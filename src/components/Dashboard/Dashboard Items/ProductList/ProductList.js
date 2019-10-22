@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Redux
 import { connect } from 'react-redux'
 
 // Actions
-import { getUser, getLocations, postUser, postProperty, editProperty, deleteProperty } from '../../../../actions'
+import { getUser, getProperties, postUser, postProperty, editProperty, deleteProperty } from '../../../../actions'
 
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
@@ -29,10 +29,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LocationsList = props => {
+const PropertyList = props => {
   const classes = useStyles();
 
-  const [products] = useState(mockData);
+  useEffect(() => {
+    if (props.properties.length === 0) {
+      props.getProperties();
+    }
+  })
 
   return (
     <div className={classes.root}>
@@ -42,7 +46,7 @@ const LocationsList = props => {
           container
           spacing={3}
         >
-          {products.map(product => (
+          {properties.map(product => (
             <Grid
               item
               key={product.id}
@@ -82,8 +86,8 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, 
   { 
     getUser, 
-    getLocations,
+    getProperties,
     postProperty,
     editProperty,
     deleteProperty
-   }) (LocationsList);
+   }) (PropertyList);
