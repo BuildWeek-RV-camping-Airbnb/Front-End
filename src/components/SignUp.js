@@ -175,8 +175,7 @@ const SignUp = props => {
                 <FormControl variant="outlined">
                   <InputLabel
                     ref={inputLabel}
-                    htmlFor="outlined-category-simple"
-                  >
+                    htmlFor="outlined-category-simple">
                     I am a ...
                   </InputLabel>
                   <Select
