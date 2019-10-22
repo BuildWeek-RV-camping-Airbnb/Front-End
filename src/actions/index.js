@@ -17,7 +17,7 @@ export const UPDATE_SUCCESSFUL = 'UPDATE_SUCCESSFUL';
 export const UPDATE_FAILURE = 'UPDATE_FAILURE';
 
 // action types - DELETE requests
-export const START_DELETING = 'START_DELETING';
+export const START_DELETE = 'START_DELETE';
 export const DELETE_SUCCESSFUL = 'DELETE_SUCCESSFUL';
 export const DELETE_FAILURE = 'DELETE_FAILURE';
 
