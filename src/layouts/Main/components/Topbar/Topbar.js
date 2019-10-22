@@ -90,7 +90,6 @@ const Topbar = props => {
         </RouterLink>
         <div className={classes.grow} />
         <div className={classes.sectionDesktop}>
-          <Button color="inherit">Home</Button>
           <Button color="inherit">Sign out</Button>
         </div>
       </Toolbar>
