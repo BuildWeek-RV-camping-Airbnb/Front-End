@@ -32,10 +32,7 @@ function Copyright() {
   );
 }
 
-
-
 const useStyles = makeStyles(theme => ({
-
   root: {
     height: '100vh'
   },
@@ -60,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1)
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(2)
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
@@ -70,15 +67,25 @@ const useStyles = makeStyles(theme => ({
 export default function SignIn() {
   const classes = useStyles();
 
-  const inputLabel = React.useRef(null);
+  const [user, setUser] = useState({
+    username: '',
+    password: ''
+  });
 
-  const [values, setValues] = React.useState({});
+  const handleChanges = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
-  const handleChange = event => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
+  const signUp = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('/api/users', user)
+      .then(res => {
+        console.log(res.data);
+        localStorage.setItem('token', res.data.payload);
+        props.history.push('/');
+      })
+      .catch(err => console.log(err.response));
   };
 
   return (
@@ -94,117 +101,119 @@ export default function SignIn() {
             Sign up
           </Typography>
           <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="fname"
+                  name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                  onChange={handleChanges}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="lname"
+                  onChange={handleChanges}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  onChange={handleChanges}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="username"
+                  label="Username"
+                  type="username"
+                  id="username"
+                  autoComplete="current-password"
+                  onChange={handleChanges}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={handleChanges}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl variant="outlined" fullWidth="true">
+                  <InputLabel
+                    ref={inputLabel}
+                    htmlFor="outlined-category-simple"
+                  >
+                    I am a ...
+                  </InputLabel>
+                  <Select
+                    value={values.category}
+                    onChange={handleChanges}
+                    // labelWidth={classes.form}
+                    inputProps={{
+                      name: 'category',
+                      id: 'outlined-category-simple'
+                    }}
+                  >
+                    <MenuItem value="">
+                      <em>Select</em>
+                    </MenuItem>
+                    <MenuItem value={10}>RV Owner</MenuItem>
+                    <MenuItem value={20}>Landowner</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={signUp}
+            >
+              Sign Up
+            </Button>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="username"
-                label="Username"
-                type="username"
-                id="username"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl variant="outlined" fullWidth="true">
-                <InputLabel ref={inputLabel} htmlFor="outlined-category-simple">
-                  I am a ...
-                </InputLabel>
-                <Select
-                  value={values.category}
-                  onChange={handleChange}
-                  // labelWidth={classes.form}
-                  inputProps={{
-                    name: 'category',
-                    id: 'outlined-category-simple',
-                  }}
-                >
-                  <MenuItem value="">
-                    <em>Select</em>
-                  </MenuItem>
-                  <MenuItem value={10}>RV Owner</MenuItem>
-                  <MenuItem value={20}>Landowner</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-          <Box mt={5}>
-            <Copyright />
-          </Box>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
           </form>
         </div>
       </Grid>
     </Grid>
   );
 }
-
-
-
-
-
-
-

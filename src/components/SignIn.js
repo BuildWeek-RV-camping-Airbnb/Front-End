@@ -20,7 +20,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -67,7 +66,7 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#f26e22'
     }
-  },
+  }
 }));
 
 const SignIn = props => {
@@ -85,7 +84,7 @@ const SignIn = props => {
   const signIn = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post('/api/users', user)
+      .post('/api/login', user)
       .then(res => {
         console.log(res.data);
         localStorage.setItem('token', res.data.payload);
@@ -103,7 +102,11 @@ const SignIn = props => {
           <Avatar className={classes.avatar}>
             <Logo />
           </Avatar>
-          <Typography className={classes.typography} component="h1" variant="h5">
+          <Typography
+            className={classes.typography}
+            component="h1"
+            variant="h5"
+          >
             Sign in
           </Typography>
           <form className={classes.form} noValidate>
@@ -139,7 +142,7 @@ const SignIn = props => {
               type="submit"
               fullWidth
               variant="contained"
-              color='primary'
+              color="primary"
               className={classes.submit}
               onChange={handleChanges}
               onClick={signIn}
@@ -166,6 +169,6 @@ const SignIn = props => {
       </Grid>
     </Grid>
   );
-}
+};
 
 export default SignIn;
