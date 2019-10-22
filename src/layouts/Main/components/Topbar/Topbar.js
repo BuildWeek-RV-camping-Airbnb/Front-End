@@ -13,7 +13,8 @@ import RvLogo from '../../../../assets/RvLogo';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    boxShadow: 'none'
+    boxShadow: 'none',
+    backgroundColor: '#034AA6'
   },
   flexGrow: {
     flexGrow: 1
