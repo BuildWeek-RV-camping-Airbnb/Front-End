@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 const LocationsGrid = props => { 
   const classes = useStyles();
+  const topRated = props.location.filter(stars => stars.rating >= 4.8);
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
@@ -28,7 +29,7 @@ const LocationsGrid = props => {
           Explore some of the best-reveiwed stays in the world
         </Typography>
       <Grid container spacing={4}>      
-        {props.XYZ.map(item => {
+        {topRated.map(item => {
           return (
             <Grid item className={classes.gridItem} s>
               <LocationCard 
@@ -52,7 +53,7 @@ const LocationsGrid = props => {
         20+ places to stay
       </Typography>
       <Grid container spacing={4}>      
-        {props.XYZ.map(item => {
+        {props.properties.map(item => {
           return (
             <Grid item className={classes.gridItem} s>
               <LocationCard 
