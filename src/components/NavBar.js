@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 
 // Assets
-import RvLogo from '../../../../assets/RvLogo';
+import RvLogo from '../assets/RvLogo';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -111,7 +111,7 @@ const Navbar = props => {
   );
 };
 
-Topbar.propTypes = {
+Navbar.propTypes = {
   className: PropTypes.string,
   onSidebarOpen: PropTypes.func
 };
