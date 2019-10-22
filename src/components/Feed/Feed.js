@@ -68,8 +68,56 @@ export default function Feed() {
 
       {/* Cards unit */}
         <Container className={classes.cardGrid} maxWidth="md">
-          <Locations/>
-        </Container>
+        <Container className={classes.cardGrid} maxWidth="md">
+        <Typography variant="h5" align="left" component="h2">
+          Top-Rated Locations
+        </Typography>
+        <Typography variant="body2" align="left" color="textSecondary" component="p">
+          Explore some of the best-reveiwed stays in the world
+        </Typography>
+      <Grid container spacing={4}>      
+        {topRated.map(item => {
+          return (
+            <Grid item className={classes.gridItem} s>
+              <LocationCard 
+                key={item.id} 
+                propertyName={item.property_name}
+                address={item.address}
+                city={item.city}
+                state={item.state}
+                price={item.price}
+                rating={item.rating}
+                ownerId={item.owner_id}
+                />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Container>
+
+    <Container className={classes.cardGrid} maxWidth="md">
+      <Typography variant="h5" align="left" component="h2">
+        20+ places to stay
+      </Typography>
+      <Grid container spacing={4}>      
+        {props.properties.map(item => {
+          return (
+            <Grid item className={classes.gridItem} s>
+              <LocationCard 
+                key={item.id} 
+                propertyName={item.property_name}
+                address={item.address}
+                city={item.city}
+                state={item.state}
+                price={item.price}
+                rating={item.rating}
+                ownerId={item.owner_id}
+                />
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Container>        </Container>
       {/* End Cards unit */}
 
       </main>
