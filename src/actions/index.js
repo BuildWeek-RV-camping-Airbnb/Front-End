@@ -28,9 +28,8 @@ export const getUser = () => {
 
   dispatchEvent({ type: START_FETCHING });
   useEffect(() => {
-    axios
-    //WithAuth
-      .get(`http://localhost:5000/api/users/:id`)
+    axiosWithAuth
+      .get(`/api/users`)
       .then(response => {
         console.log(response);
         setUser(response.data);
@@ -38,16 +37,16 @@ export const getUser = () => {
       .catch(error => {
         console.error(error);
       });
-  },[id]);};
+  }, [id]);
+};
 
 export const getProperties = () => {
   dispatchEvent({ type: START_FETCHING });
   const [property, setProperty] = useState([]);
 
   useEffect(() => {
-    axios
-    // WithAuth
-      .get(`http://localhost:5000/api/properties/:id`)
+    axiosWithAuth
+      .get(`/api/properties`)
       .then(response => {
         console.log(response);
         setProperty(response.data);
@@ -55,7 +54,8 @@ export const getProperties = () => {
       .catch(error => {
         console.error(error);
       });
-  },[id]);};
+  }, [id]);
+};
 
 export const postUser = newUser => {
   dispatchEvent({ type: START_POST });
