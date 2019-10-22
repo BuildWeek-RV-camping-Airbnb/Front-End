@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
 
 import { RouteWithLayout, SignIn, SignUp } from './components';
-import { Main as MainLayout } from './layouts';
+import { Main as MainLayout } from './components/Dashboard';
 
 
 import {
