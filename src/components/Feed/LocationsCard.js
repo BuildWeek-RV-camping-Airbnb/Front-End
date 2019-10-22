@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Material UI 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -27,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CampsiteCard() {
+const LocationsCard = () => {
   const classes = useStyles();
 
   return (
@@ -61,3 +63,5 @@ export default function CampsiteCard() {
     </Card>
   );
 }
+
+export default LocationsCard;
