@@ -29,8 +29,11 @@ const Feed = props => {
   // const topRated = props.location.filter(stars => stars.rating >= 4.8);
 
   useEffect(() => {
-    props.getProperties()
-  }, [])
+   
+    props.getProperties();
+    console.log('props...', props)
+
+  },[])
 
   return (
     <>
@@ -98,13 +101,7 @@ const mapStateToProps = state => {
     isDeleting: state.isDeleting,
     error: state.error
   };
+  
 };
 
-export default connect(mapStateToProps, 
-  { 
-    getUser, 
-    getProperties,
-    postProperty,
-    editProperty,
-    deleteProperty
-   }) (Feed);
+export default connect(mapStateToProps, { getProperties })(Feed);
