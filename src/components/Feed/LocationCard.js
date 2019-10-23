@@ -1,74 +1,111 @@
 import React from 'react';
-
-// Material UI 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-
-// Components 
-// import Heart from '../../assets/icons/Heart.svg';
-// import Star from '../../assets/icons/Star.svg';
+import { makeStyles } from '@material-ui/styles';
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  CardHeader,
+  CardMedia,
+  IconButton,
+} from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import Star from '../../assets/icons/Star';
 
 const useStyles = makeStyles(theme => ({
-  card: {
-    // maxWidth: 345,
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+  root: {
+    padding: '0px'
   },
-  header: {
-    zIndex: 9,
-    backgroundColor: 'rgba(0,0,0,0)'
+  imageContainer: {
+    height: 64,
+    width: 64,
+    margin: '0 auto',
+    border: `1px solid ${theme.palette.divider}`,
+    borderRadius: '5px',
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '0px',
+  },
+  image: {
+    width: '100%'
+  },
+  statsItem: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  statsIcon: {
+    color: theme.palette.icon,
+    marginRight: theme.spacing(1)
+  },
+  card: {
+    minWidth: 365,
+    maxWidth: 365,
+    minHeight: 430,
+    flexWrap: 'wrap'
   },
   media: {
     height: 0,
-    // paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%' // 16:9
   },
-  content: {
-    // flexGrow: 1,
+  text: {
+    minHeight: 40
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  },
+  avatar: {
+    backgroundColor: 'red[500]'
   }
 }));
 
-
-const LocationCard = (props) => {
+const LocationCard = props => {
   const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header}>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            {/* <Heart /> */}
-          </IconButton>
-        </CardActions>
-      </CardHeader>
+      <CardHeader
+      />
       <CardMedia
         className={classes.media}
-        image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
-        title={props.propertyName}
+        image="https://unsplash.com/photos/gh7gMw7A-IA"
+        title="land"
       />
-      <CardContent className={classes.content}>
+      <CardContent>
         <Typography variant="body2" align="left" color="textSecondary" component="p">
           {props.city}, {props.state}       
         </Typography>
           <Typography variant="h5" align="left" component="h3">
             {props.propertyName}
           </Typography>
-          <Typography variant="body2" align="left" color="textSecondary" component="p">
-            {props.price}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="span">
-            {/* <Star /> */}
-            {props.rating}
-          </Typography>
+        <Typography variant="body2" align="left" color="textSecondary" component="p">
+          ${props.price}/night
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          <Star />
+          {props.rating}
+        </Typography>
       </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+      </CardActions>
     </Card>
+    
   );
-}
+};
 
 export default LocationCard;
