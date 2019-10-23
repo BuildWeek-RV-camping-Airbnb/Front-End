@@ -23,6 +23,7 @@ import {
 } from '../actions';
 
 const initialState = {
+  users: [],
   properties: [],
   isFetching: false,
   isPosting: false,

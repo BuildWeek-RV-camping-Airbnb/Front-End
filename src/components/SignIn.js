@@ -84,10 +84,12 @@ const SignIn = props => {
   const signIn = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post('/api/login', user)
+      .post('/api/users/login', user)
       .then(res => {
         console.log(res.data);
-        localStorage.setItem('token', res.data.payload);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('id', res.data.id);
+        localStorage.setItem('owner', res.data.id);
         props.history.push('/');
       })
       .catch(err => console.log(err.response));

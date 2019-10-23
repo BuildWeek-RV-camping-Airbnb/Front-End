@@ -59,16 +59,6 @@ const Sidebar = props => {
       icon: <MapIcon />
     },
     {
-      title: 'Icons',
-      href: '/icons',
-      icon: <ImageIcon />
-    },
-    {
-      title: 'Account',
-      href: '/account',
-      icon: <AccountBoxIcon />
-    },
-    {
       title: 'Settings',
       href: '/settings',
       icon: <SettingsIcon />

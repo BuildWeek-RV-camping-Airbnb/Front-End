@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 // Redux
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 // Actions
-import { getUser, getPropertiesByID, postUser, postProperty, editProperty, deleteProperty } from '../../../../actions'
+import {
+  getUser,
+  getPropertiesByUserID,
+  postUser,
+  postProperty,
+  editProperty,
+  deleteProperty
+} from '../../../../actions';
 
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
@@ -12,7 +19,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { PropertyToolbar, PropertyCard } from './components';
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,30 +39,32 @@ const PropertyList = props => {
   const classes = useStyles();
 
   useEffect(() => {
-    props.getPropertiesByID();
-  }, [])
+    const userID = localStorage.getItem('id');
+    props.getPropertiesByUserID(userID);
+  }, []);
 
   return (
     <div className={classes.root}>
       <PropertyToolbar />
       <div className={classes.content}>
-        <Grid
-          container
-          spacing={3}
-        >
-          {props.properties && props.properties.map(property => (
-            <Grid
-              item
-              key={property.id}
-              lg={4}
-              md={6}
-              xs={12}
-            >
-              <PropertyCard properties={props.properties} />
+      <Grid container spacing={4}>      
+        {props.properties.map(item => {
+          return (
+            <Grid item className={classes.gridItem} s>
+              <PropertyCard 
+                key={item.id} 
+                propertyName={item.property_name}
+                address={item.address}
+                city={item.city}
+                state={item.state}
+                price={item.price}
+                rating={item.rating}
+                ownerId={item.owner_id}
+                />
             </Grid>
-          ))}
-        </Grid>
-      </div>
+          );
+        })}
+      </Grid>
       <div className={classes.pagination}>
         <Typography variant="caption">1-6 of 20</Typography>
         <IconButton>
@@ -66,6 +74,7 @@ const PropertyList = props => {
           <ChevronRightIcon />
         </IconButton>
       </div>
+    </div>
     </div>
   );
 };
@@ -81,11 +90,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, 
-  { 
-    getUser, 
-    getPropertiesByID,
+export default connect(
+  mapStateToProps,
+  {
+    getUser,
+    getPropertiesByUserID,
     postProperty,
     editProperty,
     deleteProperty
-   }) (PropertyList);
+  }
+)(PropertyList);
