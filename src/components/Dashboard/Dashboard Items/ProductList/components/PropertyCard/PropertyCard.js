@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
+import PropertyToolbar from '../PropertyToolbar';
 
 const useStyles = makeStyles(theme => ({
   root: {},

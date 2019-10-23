@@ -11,8 +11,8 @@ import { IconButton, Grid, Typography } from '@material-ui/core';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-import { ProductsToolbar, PropertyCard } from './components';
-import mockData from './data';
+import { PropertyToolbar, PropertyCard } from './components';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,16 +31,14 @@ const useStyles = makeStyles(theme => ({
 
 const PropertyList = props => {
   const classes = useStyles();
-  console.log('props...', props)
+
   useEffect(() => {
-    
-      props.getProperties();
-      console.log(props)
+    props.getProperties();
   }, [])
 
   return (
     <div className={classes.root}>
-      {/* <ProductsToolbar /> */}
+      <PropertyToolbar />
       <div className={classes.content}>
         <Grid
           container
