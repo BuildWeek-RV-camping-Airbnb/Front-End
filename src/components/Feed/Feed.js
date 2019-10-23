@@ -32,7 +32,7 @@ const Feed = props => {
   // const topRated = props.location.filter(stars => stars.rating >= 4.8);
 
   useEffect(() => {
-   
+  
     props.getProperties();
     console.log('props...', props)
 
@@ -77,7 +77,7 @@ const Feed = props => {
     <Grid container spacing={4}>      
       {props.properties.map(item => {
         return (
-          <Grid item className={classes.gridItem} s>
+          <Grid item className={classes.gridItem} m>
             <LocationCard 
               key={item.id} 
               propertyName={item.property_name}

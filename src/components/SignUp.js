@@ -89,7 +89,14 @@ const SignUp = props => {
       .then(res => {
         console.log(res.data);
         localStorage.setItem('token', res.data.payload);
-        props.history.push('/');
+        localStorage.setItem('id', res.data.payload);
+        localStorage.setItem('owner', res.data.payload);
+        if(res.data.owner === true) {
+          props.history.push('/');
+        }
+          else {
+            props.history.push('/feed');
+        }
       })
       .catch(err => console.log(err.response));
   };
