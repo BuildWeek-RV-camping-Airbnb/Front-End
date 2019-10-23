@@ -16,7 +16,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345,
+    // maxWidth: 345,
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    // paddingTop: '56.25%', // 16:9
   },
   content: {
     // flexGrow: 1,
