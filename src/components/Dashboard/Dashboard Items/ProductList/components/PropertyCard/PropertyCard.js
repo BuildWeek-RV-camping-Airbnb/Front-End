@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
@@ -15,15 +15,17 @@ import {
   Menu,
   MenuItem,
   Grid,
+  TextField,
+  Button,
   Divider
 } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import GetAppIcon from '@material-ui/icons/GetApp';
+import Modal from '@material-ui/core/Modal';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
 import PropertyToolbar from '../PropertyToolbar';
+import Logo from '../../../../../../assets/Logo';
 
 import {
   editProperty,
@@ -34,6 +36,21 @@ import {
 import Star from '../../../../../../assets/icons/Star';
 import Heart from '../../../../../../assets/icons/Heart';
 
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`
+  };
+}
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: '0px'
@@ -42,7 +59,7 @@ const useStyles = makeStyles(theme => ({
     height: 64,
     width: 64,
     margin: '0 auto',
-    border: `1px solid ${theme.palette.divider}`,
+    // border: `1px solid ${theme.palette.divider}`,
     borderRadius: '5px',
     overflow: 'hidden',
     display: 'flex',
@@ -86,18 +103,72 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: 'red[500]'
+  },
+  paper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3)
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
   }
 }));
 
 const PropertyCard = props => {
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [editing, setEditing] = React.useState(false);
+  const [propertyToEdit, setPropertyToEdit] = useState({
+    property_name: '',
+    description: '',
+    address: '',
+    city: '',
+    state: '',
+    image: '',
+    price: ''
+  });
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleChanges = e => {
+    setPropertyToEdit({ ...propertyToEdit, [e.target.name]: e.target.value });
+  };
+
+  const editProperty = id => {
+    setEditing(true);
+    setPropertyToEdit(id);
+  };
+
+  const saveProperty = e => {
+    e.preventDefault();
+    const userID = localStorage.getItem('id');
+    console.log('Props Property...', { ...propertyToEdit, owner_id: userID });
+    props.editProperty({ ...propertyToEdit, owner_id: userID });
+    setPropertyToEdit('');
   };
 
   const deleteProperty = id => {
@@ -124,7 +195,139 @@ const PropertyCard = props => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Edit Post</MenuItem>
+              <MenuItem onClick={handleOpen}>Edit Post</MenuItem>
+              <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={open}
+                onClose={handleClose}
+              >
+                <div style={modalStyle} className={classes.paper}>
+                  <Avatar className={classes.avatar}>
+                    <Logo />
+                  </Avatar>
+                  <Typography component="h1" variant="h5">
+                    Edit Property
+                  </Typography>
+                  {/* {editing && ( */}
+                    <form className={classes.form} noValidate>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <TextField
+                            autoComplete="pname"
+                            name="property_name"
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="property_name"
+                            label="Property Name"
+                            autoFocus
+                            onChange={handleChanges}
+                            value={propertyToEdit.property_name}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="description"
+                            label="Description"
+                            name="description"
+                            value={propertyToEdit.description}
+                            onChange={handleChanges}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            id="address"
+                            label="Address"
+                            name="address"
+                            autoComplete="address"
+                            onChange={handleChanges}
+                            value={propertyToEdit.address}
+                          />
+                        </Grid>
+                        <Grid item xs={12} xs={6}>
+                          <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            name="city"
+                            label="City"
+                            type="city"
+                            id="city"
+                            value={propertyToEdit.city}
+                            onChange={handleChanges}
+                          />
+                        </Grid>
+                        <Grid item xs={12} xs={6}>
+                          <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            name="state"
+                            label="State"
+                            type="state"
+                            id="state"
+                            value={propertyToEdit.state}
+                            onChange={handleChanges}
+                          />
+                        </Grid>
+                        <Grid item xs={12} xs={6}>
+                          <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            name="price"
+                            label="Price per night"
+                            type="price"
+                            id="price"
+                            value={propertyToEdit.price}
+                            onChange={handleChanges}
+                          />
+                        </Grid>
+                        {/* <Grid item xs={12}>
+                              <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="image"
+                                label="Image url"
+                                type="image"
+                                id="image"
+                                value={propertyToEdit.image}
+                                onChange={handleChanges}
+                              />
+                            </Grid> */}
+                      </Grid>
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={saveProperty}
+                      >
+                        Edit Property
+                      </Button>
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={() => setEditing(false)}
+                      >
+                        Cancel
+                      </Button>
+                    </form>
+                  {/* )} */}
+                </div>
+              </Modal>
               <MenuItem onClick={() => deleteProperty(props.id)}>
                 Delete Post
               </MenuItem>
