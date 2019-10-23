@@ -52,7 +52,8 @@ const PropertyList = props => {
           return (
             <Grid item className={classes.gridItem} s>
               <PropertyCard 
-                key={item.id} 
+                key={item.id}
+                id={item.id} 
                 propertyName={item.property_name}
                 address={item.address}
                 city={item.city}

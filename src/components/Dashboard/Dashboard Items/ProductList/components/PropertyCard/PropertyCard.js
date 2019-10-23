@@ -25,7 +25,7 @@ import ShareIcon from '@material-ui/icons/Share';
 
 import PropertyToolbar from '../PropertyToolbar';
 
-import { editProperty, deleteProperty } from '../../../../../../actions'
+import { editProperty, deleteProperty, getPropertiesByUserID } from '../../../../../../actions'
 
 import Star from '../../../../../../assets/icons/Star';
 import Heart from '../../../../../../assets/icons/Heart';
@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PropertyCard = props => {
-  // const { className, properties, ...rest } = props;
+  console.log('CardProps...', props)
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -98,7 +98,10 @@ const PropertyCard = props => {
   };
 
   const deleteProperty = id => {
-    props.deleteProperty();
+    props.deleteProperty(id).then(res => {
+      const userID = localStorage.getItem('id');
+      props.getPropertiesByUserID(userID);
+    });
   }
 
   const classes = useStyles();
@@ -128,7 +131,7 @@ const PropertyCard = props => {
       />
       <CardMedia
         className={classes.media}
-        image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
+        image="https://unsplash.com/photos/gh7gMw7A-IA"
         title="land"
       />
       <CardContent>
@@ -174,6 +177,7 @@ export default connect(
   mapStateToProps,
   {
     editProperty,
-    deleteProperty
+    deleteProperty,
+    getPropertiesByUserID
   }
 )(PropertyCard);
