@@ -9,6 +9,10 @@ export const START_FETCHING_PROPERTY = 'START_FETCHING_PROPERTY';
 export const FETCH_SUCCESS_PROPERTY = 'FETCH_SUCCESS_PROPERTY';
 export const FETCH_FAILURE_PROPERTY = 'FETCH_FAILURE_PROPERTY';
 
+export const START_FETCHING_PROPERTY_ID = 'START_FETCHING_PROPERTY_ID';
+export const FETCH_SUCCESS_PROPERTY_ID = 'FETCH_SUCCESS_PROPERTY_ID';
+export const FETCH_FAILURE_PROPERTY_ID = 'FETCH_FAILURE_PROPERTY_ID';
+
 // action types - POST requests
 export const START_POST_USER = 'START_POST_USER';
 export const POST_SUCCESS_USER = 'POST_SUCCESS_USER';
@@ -43,6 +47,14 @@ export const getProperties = () => dispatch => {
     .get('/api/properties')
     .then(res => dispatch({ type: FETCH_SUCCESS_PROPERTY, payload: res.data.properties }))
     .catch(err => dispatch({ type: FETCH_FAILURE_PROPERTY, payload: err.response}));
+};
+
+export const getPropertiesByID = () => dispatch => {
+  dispatch({ type: START_FETCHING_PROPERTY_ID });
+  axiosWithAuth()
+    .get('/api/properties')
+    .then(res => dispatch({ type: FETCH_SUCCESS_PROPERTY_ID, payload: res.data.properties }))
+    .catch(err => dispatch({ type: FETCH_FAILURE_PROPERTY_ID, payload: err.response}));
 };
 
 export const postUser = newUser => dispatch => {

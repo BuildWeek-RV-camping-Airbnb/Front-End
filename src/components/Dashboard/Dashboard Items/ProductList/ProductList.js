@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 
 // Actions
-import { getUser, getProperties, postUser, postProperty, editProperty, deleteProperty } from '../../../../actions'
+import { getUser, getPropertiesByID, postUser, postProperty, editProperty, deleteProperty } from '../../../../actions'
 
 import { makeStyles } from '@material-ui/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
@@ -33,7 +33,7 @@ const PropertyList = props => {
   const classes = useStyles();
 
   useEffect(() => {
-    props.getProperties();
+    props.getPropertiesByID();
   }, [])
 
   return (
@@ -84,7 +84,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, 
   { 
     getUser, 
-    getProperties,
+    getPropertiesByID,
     postProperty,
     editProperty,
     deleteProperty
