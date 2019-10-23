@@ -11,8 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import LocationCard from './LocationCard';
 import Navbar from '../NavBar';
 import Footer from '../../components/Footer';
-import { getUser, getProperties, postUser, postProperty, editProperty, deleteProperty } from '../../actions'
-
+import { getProperties } from '../../actions'
 
 const useStyles = makeStyles(theme => ({
     root: {
