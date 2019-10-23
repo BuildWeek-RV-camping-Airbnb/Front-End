@@ -1,21 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/styles';
 import {
+  Avatar,
   Card,
   CardContent,
   CardActions,
   Typography,
+  CardHeader,
+  CardMedia,
+  IconButton,
+  Menu,
+  MenuItem,
   Grid,
   Divider
 } from '@material-ui/core';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import GetAppIcon from '@material-ui/icons/GetApp';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+
 import PropertyToolbar from '../PropertyToolbar';
 
+import { editProperty, deleteProperty } from '../../../../../../actions'
+
+import Star from '../../../../../../assets/icons/Star';
+import Heart from '../../../../../../assets/icons/Heart';
+
 const useStyles = makeStyles(theme => ({
-  root: {},
+  root: {
+    padding: '0px'
+  },
   imageContainer: {
     height: 64,
     width: 64,
@@ -25,7 +43,8 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: '0px',
   },
   image: {
     width: '100%'
@@ -37,80 +56,124 @@ const useStyles = makeStyles(theme => ({
   statsIcon: {
     color: theme.palette.icon,
     marginRight: theme.spacing(1)
+  },
+  card: {
+    minWidth: 365,
+    maxWidth: 365,
+    minHeight: 430,
+    flexWrap: 'wrap'
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%' // 16:9
+  },
+  text: {
+    minHeight: 40
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)'
+  },
+  avatar: {
+    backgroundColor: 'red[500]'
   }
 }));
 
 const PropertyCard = props => {
-  const { className, properties, ...rest } = props;
+  // const { className, properties, ...rest } = props;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const deleteProperty = id => {
+    props.deleteProperty();
+  }
 
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardContent>
-        <div className={classes.imageContainer}>
-          <img
-            alt="Product"
-            className={classes.image}
-            // src={props.imageUrl}
-          />
+    <Card className={classes.card}>
+      <CardHeader
+        action={
+          <div>
+          <IconButton aria-label="settings" onClick={handleClick}>
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Edit Post</MenuItem>
+          <MenuItem onClick={() => deleteProperty(props.id)}>Delete Post</MenuItem>
+        </Menu>
         </div>
-        <Typography
-          align="center"
-          gutterBottom
-          variant="h4"
-        >
-          {props.property_name}
+        }
+        // title={props.propertyName}
+        // subheader={props.users}
+      />
+      <CardMedia
+        className={classes.media}
+        image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
+        title="land"
+      />
+      <CardContent>
+        <Typography variant="body2" align="left" color="textSecondary" component="p">
+          {props.city}, {props.state}       
         </Typography>
-        <Typography
-          align="center"
-          variant="body1"
-        >
-          {props.description}
+          <Typography variant="h5" align="left" component="h3">
+            {props.propertyName}
+          </Typography>
+        <Typography variant="body2" align="left" color="textSecondary" component="p">
+          ${props.price}/night
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          <Star />
+          {props.rating}
         </Typography>
       </CardContent>
-      <Divider />
-      <CardActions>
-        <Grid
-          container
-          justify="space-between"
-        >
-          <Grid
-            className={classes.statsItem}
-            item
-          >
-            <AccessTimeIcon className={classes.statsIcon} />
-            <Typography
-              display="inline"
-              variant="body2"
-            >
-              Updated 2hr ago
-            </Typography>
-          </Grid>
-          <Grid
-            className={classes.statsItem}
-            item
-          >
-            <GetAppIcon className={classes.statsIcon} />
-            <Typography
-              display="inline"
-              variant="body2"
-            >
-              {props.totalDownloads} Downloads
-            </Typography>
-          </Grid>
-        </Grid>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
       </CardActions>
     </Card>
+    
   );
 };
 
-PropertyCard.propTypes = {
-  className: PropTypes.string,
-  product: PropTypes.object.isRequired
+const mapStateToProps = state => {
+  return {
+    properties: state.properties,
+    isFetching: state.isFetching,
+    isPosting: state.isPosting,
+    isUpdating: state.isUpdating,
+    isDeleting: state.isDeleting,
+    error: state.error
+  };
 };
 
-export default PropertyCard;
+export default connect(
+  mapStateToProps,
+  {
+    editProperty,
+    deleteProperty
+  }
+)(PropertyCard);

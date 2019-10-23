@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { connect } from 'react-redux'
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Avatar, Typography } from '@material-ui/core';
+
+import { getUser } from '../../../../../../../actions'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,41 +26,47 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Profile = props => {
-  const { className, ...rest } = props;
+  
 
   const classes = useStyles();
 
-  const user = {
-    name: 'Shen Zhi',
-    avatar: '/images/avatars/avatar_11.png',
-    bio: 'Brain Director'
-  };
+  
+
+  useEffect(() => {
+    const userID = localStorage.getItem('id');
+    props.getUser(userID);
+    console.log()
+  }, [])
+
+
 
   return (
     <div
-      {...rest}
-      className={clsx(classes.root, className)}
     >
-      <Avatar
+      {/* <Avatar
         alt="Person"
         className={classes.avatar}
         component={RouterLink}
-        src={user.avatar}
+        // src={props.user.avatar}
         to="/settings"
-      />
+      /> */}
       <Typography
         className={classes.name}
         variant="h4"
       >
-        {user.name}
+        {props.first_name}
       </Typography>
-      <Typography variant="body2">{user.bio}</Typography>
+      {/* <Typography variant="body2">{user.bio}</Typography> */}
     </div>
   );
 };
 
-Profile.propTypes = {
-  className: PropTypes.string
+const mapStateToProps = state => {
+  return {
+    users: state.users,
+    isFetching: state.isFetching,
+    error: state.error
+  };
 };
 
-export default Profile;
+export default connect(mapStateToProps, { getUser })(Profile);

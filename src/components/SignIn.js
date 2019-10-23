@@ -84,9 +84,9 @@ const SignIn = props => {
   const signIn = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post('/api/login', user)
+      .post('/api/users/login', user)
       .then(res => {
-        console.log(res.data);
+        console.log(res.data)
         localStorage.setItem('token', res.data.payload);
         localStorage.setItem('id', res.data.payload);
         localStorage.setItem('owner', res.data.payload);

@@ -25,6 +25,9 @@ const useStyles = makeStyles(theme => ({
   },
   searchInput: {
     marginRight: theme.spacing(1)
+  },
+  btn: {
+    backgroundColor: '#F26E22',
   }
 }));
 
@@ -40,9 +43,8 @@ const PropertyToolbar = props => {
     >
       <div className={classes.row}>
         <span className={classes.spacer} />
-        <Button className={classes.importButton}>Import</Button>
-        <Button className={classes.exportButton}>Export</Button>
         <Button
+          className={classes.btn}
           color="primary"
           variant="contained"
         >
