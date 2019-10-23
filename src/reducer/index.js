@@ -77,6 +77,7 @@ const reducer = (state = initialState, action) => {
         error: ''
       };
     case FETCH_SUCCESS_PROPERTY:
+      console.log('action..', action.payload)
       return {
         ...state,
         isFetching: false,
@@ -116,7 +117,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isPosting: false,
-        users: action.payload
+        properties: action.payload
       };
     case POST_FAILURE_PROPERTY:
       return {
