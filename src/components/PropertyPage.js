@@ -1,7 +1,13 @@
 import React from 'react';
+
+// Material UI
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+// Components
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
