@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 // Components
 import LocationCard from './LocationCard';
-import Navbar from '../../components/Navbar';
+import Navbar from '../NavBar';
 import Footer from '../../components/Footer';
 import { getUser, getProperties, postUser, postProperty, editProperty, deleteProperty } from '../../actions'
 
@@ -48,7 +48,7 @@ const Feed = props => {
       Top-Rated Locations
     </Typography>
     <Typography variant="body2" align="left" color="textSecondary" component="p">
-      Explore some of the best-reveiwed stays in the world
+      Explore some of the best-reviewed stays in the world
     </Typography>
     {/* <Grid container spacing={4}>      
       {topRated.map(item => {
