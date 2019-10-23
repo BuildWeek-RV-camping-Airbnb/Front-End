@@ -11,8 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 // Components 
-import Heart from '../../assets/icons/Heart.svg';
-import Star from '../../assets/icons/Star.svg';
+// import Heart from '../../assets/icons/Heart.svg';
+// import Star from '../../assets/icons/Star.svg';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -43,7 +43,7 @@ const LocationCard = (props) => {
       <CardHeader className={classes.header}>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
-            <Heart />
+            {/* <Heart /> */}
           </IconButton>
         </CardActions>
       </CardHeader>
@@ -63,7 +63,7 @@ const LocationCard = (props) => {
             {props.price}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="span">
-            <Star />
+            {/* <Star /> */}
             {props.rating}
           </Typography>
       </CardContent>

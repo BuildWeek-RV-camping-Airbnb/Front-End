@@ -1,10 +1,16 @@
 import {
-  START_FETCHING,
-  FETCH_SUCCESS,
-  FETCH_FAILURE,
-  START_POST,
-  POST_SUCCESS,
-  POST_FAILURE,
+  START_FETCHING_USER,
+  FETCH_SUCCESS_USER,
+  FETCH_FAILURE_USER,
+  START_POST_USER,
+  POST_SUCCESS_USER,
+  POST_FAILURE_USER,
+  START_FETCHING_PROPERTY,
+  FETCH_SUCCESS_PROPERTY,
+  FETCH_FAILURE_PROPERTY,
+  START_POST_PROPERTY,
+  POST_SUCCESS_PROPERTY,
+  POST_FAILURE_PROPERTY,
   START_UPDATE,
   UPDATE_SUCCESSFUL,
   UPDATE_FAILURE,
@@ -22,40 +28,75 @@ const initialState = {
   error: ''
 };
 
-const locationsReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case START_FETCHING:
+    case START_FETCHING_USER:
       return {
         ...state,
         isFetching: true,
         error: ''
       };
-    case FETCH_SUCCESS:
-      console.log(action)
+    case FETCH_SUCCESS_USER:
       return {
         ...state,
         isFetching: false,
-        properties: action.payload
+        users: action.payload
       };
-    case FETCH_FAILURE:
+    case FETCH_FAILURE_USER:
       return {
         ...state,
         isFetching: false,
         error: action.payload
       };
-    case START_POST:
+    case START_POST_USER:
       return {
         ...state,
         isFetching: true,
         error: ''
       };
-    case POST_SUCCESS:
+    case POST_SUCCESS_USER:
       return {
         ...state,
         isPosting: false,
         users: action.payload
       };
-    case POST_FAILURE:
+    case POST_FAILURE_USER:
+      return {
+        ...state,
+        isPosting: false,
+        error: action.payload
+      };
+    case START_FETCHING_PROPERTY:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      };
+    case FETCH_SUCCESS_PROPERTY:
+      return {
+        ...state,
+        isFetching: false,
+        properties: action.payload
+      };
+    case FETCH_FAILURE_PROPERTY:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      };
+    case START_POST_PROPERTY:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      };
+    case POST_SUCCESS_PROPERTY:
+      return {
+        ...state,
+        isPosting: false,
+        users: action.payload
+      };
+    case POST_FAILURE_PROPERTY:
       return {
         ...state,
         isPosting: false,
@@ -102,4 +143,4 @@ const locationsReducer = (state = initialState, action) => {
   }
 };
 
-export default locationsReducer;
+export default reducer;
