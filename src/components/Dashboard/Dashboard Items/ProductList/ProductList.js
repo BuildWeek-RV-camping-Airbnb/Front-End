@@ -36,7 +36,7 @@ const PropertyList = props => {
     
       props.getProperties();
       console.log(props)
-  })
+  }, [])
 
   return (
     <div className={classes.root}>
