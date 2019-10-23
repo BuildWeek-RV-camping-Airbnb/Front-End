@@ -197,8 +197,8 @@ const SignUp = props => {
                     <MenuItem value="">
                       <em>Select</em>
                     </MenuItem>
-                    <MenuItem className={classes.rv} value={false}>RV Owner</MenuItem>
-                    <MenuItem className={classes.land} value={true}>Landowner</MenuItem>
+                    <MenuItem value={false}>RV Owner</MenuItem>
+                    <MenuItem value={true}>Landowner</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
