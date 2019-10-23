@@ -80,13 +80,13 @@ export const postUser = newUser => dispatch => {
 
 export const postProperty = newProperty => dispatch => {
   dispatch({ type: START_POST_PROPERTY });
+  console.log(newProperty)
   axiosWithAuth()
     .post(`/api/properties`, newProperty)
-    .then(res =>
-      dispatch({ type: POST_SUCCESS_PROPERTY, payload: res.data.properties })
-    )
-    .catch(err =>
-      dispatch({ type: POST_FAILURE_PROPERTY, payload: err.response })
+    .then(res => dispatch({ type: POST_SUCCESS_PROPERTY, payload: newProperty }))
+    .catch(
+      err => console.log(err.body)
+      // dispatch({ type: POST_FAILURE_PROPERTY, payload: err.response }),
     );
 };
 
@@ -100,12 +100,10 @@ export const editProperty = (updateProperty, id) => dispatch => {
     .catch(err => dispatch({ type: UPDATE_FAILURE, payload: err.response }));
 };
 
-export const deleteProperty = (id) => dispatch => {
+export const deleteProperty = id => dispatch => {
   dispatch({ type: START_DELETE });
   return axiosWithAuth()
     .delete(`/api/properties/${id}`)
-    .then(res =>
-      dispatch({ type: DELETE_SUCCESSFUL })
-    )
+    .then(res => dispatch({ type: DELETE_SUCCESSFUL }))
     .catch(err => dispatch({ type: DELETE_FAILURE, payload: err.response }));
 };

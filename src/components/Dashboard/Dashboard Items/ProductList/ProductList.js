@@ -48,7 +48,7 @@ const PropertyList = props => {
       <PropertyToolbar />
       <div className={classes.content}>
       <Grid container spacing={4}>      
-        {props.properties.map(item => {
+        {props.properties && props.properties.map(item => {
           return (
             <Grid item className={classes.gridItem} s>
               <PropertyCard 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -18,6 +18,8 @@ import Modal from '@material-ui/core/Modal';
 import Logo from '../../../../../../assets/Logo';
 
 import { getPropertiesByUserID, postProperty } from '../../../../../../actions';
+import { axiosWithAuth } from '../../../../../../utils/axiosWithAuth';
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -94,6 +96,18 @@ const PropertyToolbar = props => {
   });
   const [property, setProperty] = useState({});
 
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`/api/properties`)
+      .then(res => {
+        console.log(res);
+        setProperty(res.data);
+      })
+      .catch(err => {
+        console.log('ERROR in GET post api', err.res);
+      })
+  }, [])
+
   const classes = useStyles();
 
   const handleOpen = () => {
@@ -110,11 +124,12 @@ const PropertyToolbar = props => {
 
   const addProperty = e => {
     e.preventDefault();
-    props.postProperty(newProperty);
-    setNewProperty('');
     const userID = localStorage.getItem('id');
-      props.getPropertiesByUserID(userID);
-  };
+    console.log('Props Property...', {...newProperty, owner_id: userID})
+    props.postProperty({...newProperty, owner_id: userID});
+    setNewProperty('');
+  }
+ 
 
   return (
     <div>
@@ -134,94 +149,94 @@ const PropertyToolbar = props => {
           open={open}
           onClose={handleClose}
         >
-              <div style={modalStyle} className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                  <Logo />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  Sign up
-                </Typography>
-                <form className={classes.form} noValidate>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <TextField
-                        autoComplete="pname"
-                        name="property_name"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="property_name"
-                        label="Property Name"
-                        autoFocus
-                        onChange={handleChanges}
-                        value={property.property_name}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="description"
-                        label="Description"
-                        name="description"
-                        value={property.description}
-                        onChange={handleChanges}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="address"
-                        label="Address"
-                        name="address"
-                        autoComplete="address"
-                        onChange={handleChanges}
-                        value={property.address}
-                      />
-                    </Grid>
-                    <Grid item xs={12} xs={6}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="city"
-                        label="City"
-                        type="city"
-                        id="city"
-                        value={property.city}
-                        onChange={handleChanges}
-                      />
-                    </Grid>
-                    <Grid item xs={12} xs={6}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="state"
-                        label="State"
-                        type="state"
-                        id="state"
-                        value={property.state}
-                        onChange={handleChanges}
-                      />
-                    </Grid>
-                    <Grid item xs={12} xs={6}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="price"
-                        label="Price per night"
-                        type="price"
-                        id="price"
-                        value={property.price}
-                        onChange={handleChanges}
-                      />
-                    </Grid>
-                    {/* <Grid item xs={12}>
+          <div style={modalStyle} className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <Logo />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <form className={classes.form} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    autoComplete="pname"
+                    name="property_name"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="property_name"
+                    label="Property Name"
+                    autoFocus
+                    onChange={handleChanges}
+                    value={property.property_name}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="description"
+                    label="Description"
+                    name="description"
+                    value={property.description}
+                    onChange={handleChanges}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="address"
+                    label="Address"
+                    name="address"
+                    autoComplete="address"
+                    onChange={handleChanges}
+                    value={property.address}
+                  />
+                </Grid>
+                <Grid item xs={12} xs={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="city"
+                    label="City"
+                    type="city"
+                    id="city"
+                    value={property.city}
+                    onChange={handleChanges}
+                  />
+                </Grid>
+                <Grid item xs={12} xs={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="state"
+                    label="State"
+                    type="state"
+                    id="state"
+                    value={property.state}
+                    onChange={handleChanges}
+                  />
+                </Grid>
+                <Grid item xs={12} xs={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="price"
+                    label="Price per night"
+                    type="price"
+                    id="price"
+                    value={property.price}
+                    onChange={handleChanges}
+                  />
+                </Grid>
+                {/* <Grid item xs={12}>
                       <TextField
                         variant="outlined"
                         required
@@ -234,20 +249,19 @@ const PropertyToolbar = props => {
                         onChange={handleChanges}
                       />
                     </Grid> */}
-                  </Grid>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={postProperty}
-                  >
-                    Add Property
-                  </Button>
-                </form>
-              </div>
-           
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={addProperty}
+              >
+                Add Property
+              </Button>
+            </form>
+          </div>
         </Modal>
       </div>
       <div className={classes.row}>
@@ -260,19 +274,9 @@ const PropertyToolbar = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    properties: state.properties,
-    isFetching: state.isFetching,
-    isPosting: state.isPosting,
-    isUpdating: state.isUpdating,
-    isDeleting: state.isDeleting,
-    error: state.error
-  };
-};
 
 export default connect(
-  mapStateToProps,
+  null,
   {
     getPropertiesByUserID,
     postProperty

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import {
   Avatar,
@@ -25,7 +25,11 @@ import ShareIcon from '@material-ui/icons/Share';
 
 import PropertyToolbar from '../PropertyToolbar';
 
-import { editProperty, deleteProperty, getPropertiesByUserID } from '../../../../../../actions'
+import {
+  editProperty,
+  deleteProperty,
+  getPropertiesByUserID
+} from '../../../../../../actions';
 
 import Star from '../../../../../../assets/icons/Star';
 import Heart from '../../../../../../assets/icons/Heart';
@@ -44,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '0px',
+    padding: '0px'
   },
   image: {
     width: '100%'
@@ -86,7 +90,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PropertyCard = props => {
-  console.log('CardProps...', props)
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
@@ -102,7 +105,7 @@ const PropertyCard = props => {
       const userID = localStorage.getItem('id');
       props.getPropertiesByUserID(userID);
     });
-  }
+  };
 
   const classes = useStyles();
 
@@ -111,37 +114,47 @@ const PropertyCard = props => {
       <CardHeader
         action={
           <div>
-          <IconButton aria-label="settings" onClick={handleClick}>
-            <MoreVertIcon />
-          </IconButton>
-          <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>Edit Post</MenuItem>
-          <MenuItem onClick={() => deleteProperty(props.id)}>Delete Post</MenuItem>
-        </Menu>
-        </div>
+            <IconButton aria-label="settings" onClick={handleClick}>
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Edit Post</MenuItem>
+              <MenuItem onClick={() => deleteProperty(props.id)}>
+                Delete Post
+              </MenuItem>
+            </Menu>
+          </div>
         }
-        // title={props.propertyName}
-        // subheader={props.users}
       />
       <CardMedia
         className={classes.media}
-        image="https://unsplash.com/photos/gh7gMw7A-IA"
+        image="https://unsplash.com/photos/zAjdgNXsMeg"
         title="land"
       />
       <CardContent>
-        <Typography variant="body2" align="left" color="textSecondary" component="p">
-          {props.city}, {props.state}       
+        <Typography
+          variant="body2"
+          align="left"
+          color="textSecondary"
+          component="p"
+        >
+          {props.city}, {props.state}
         </Typography>
-          <Typography variant="h5" align="left" component="h3">
-            {props.propertyName}
-          </Typography>
-        <Typography variant="body2" align="left" color="textSecondary" component="p">
+        <Typography variant="h5" align="left" component="h3">
+          {props.propertyName}
+        </Typography>
+        <Typography
+          variant="body2"
+          align="left"
+          color="textSecondary"
+          component="p"
+        >
           ${props.price}/night
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -158,7 +171,6 @@ const PropertyCard = props => {
         </IconButton>
       </CardActions>
     </Card>
-    
   );
 };
 
