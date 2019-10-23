@@ -152,7 +152,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isDeleting: false,
-        properties: action.payload
       };
     case DELETE_FAILURE:
       return {

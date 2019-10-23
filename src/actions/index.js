@@ -100,12 +100,12 @@ export const editProperty = (updateProperty, id) => dispatch => {
     .catch(err => dispatch({ type: UPDATE_FAILURE, payload: err.response }));
 };
 
-export const deleteProperty = (deleteProperty, id) => dispatch => {
+export const deleteProperty = (id) => dispatch => {
   dispatch({ type: START_DELETE });
-  axiosWithAuth()
-    .delete(`/api/properties/${id}`, deleteProperty)
+  return axiosWithAuth()
+    .delete(`/api/properties/${id}`)
     .then(res =>
-      dispatch({ type: DELETE_SUCCESSFUL, payload: res.data.properties })
+      dispatch({ type: DELETE_SUCCESSFUL })
     )
     .catch(err => dispatch({ type: DELETE_FAILURE, payload: err.response }));
 };
