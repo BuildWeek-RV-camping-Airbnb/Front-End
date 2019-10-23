@@ -20,7 +20,6 @@ import Logo from '../../../../../../assets/Logo';
 import { getPropertiesByUserID, postProperty } from '../../../../../../actions';
 import { axiosWithAuth } from '../../../../../../utils/axiosWithAuth';
 
-
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -105,8 +104,8 @@ const PropertyToolbar = props => {
       })
       .catch(err => {
         console.log('ERROR in GET post api', err.res);
-      })
-  }, [])
+      });
+  }, []);
 
   const classes = useStyles();
 
@@ -125,11 +124,10 @@ const PropertyToolbar = props => {
   const addProperty = e => {
     e.preventDefault();
     const userID = localStorage.getItem('id');
-    console.log('Props Property...', {...newProperty, owner_id: userID})
-    props.postProperty({...newProperty, owner_id: userID});
+    console.log('Props Property...', { ...newProperty, owner_id: userID });
+    props.postProperty({ ...newProperty, owner_id: userID });
     setNewProperty('');
-  }
- 
+  };
 
   return (
     <div>
@@ -154,7 +152,7 @@ const PropertyToolbar = props => {
               <Logo />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Add Property
             </Typography>
             <form className={classes.form} noValidate>
               <Grid container spacing={2}>
@@ -273,7 +271,6 @@ const PropertyToolbar = props => {
     </div>
   );
 };
-
 
 export default connect(
   null,
