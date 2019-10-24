@@ -35,12 +35,12 @@ const Feed = props => {
   const classes = useStyles();
   // const topRated = props.location.filter(stars => stars.rating >= 4.8);
 
-  // useEffect((props) => {
+  useEffect(() => {
   
-  //   props.getProperties();
-  //   console.log('props...', props)
+    props.getProperties();
+    console.log('props...', props)
 
-  // },[])
+  },[])
 
   return (
     <div className="Feed">
