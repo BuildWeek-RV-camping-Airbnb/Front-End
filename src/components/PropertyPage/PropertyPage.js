@@ -47,9 +47,9 @@ const PropertyPage = props => {
   const classes = useStyles();
 
   useEffect(() => {
-    const id = props.match.params.id;
-    props.getPropertiesByID(id)
-    console.log('Properties props...', props)
+    const propertyID = props.match.params.id;
+    props.getPropertiesByID(propertyID)
+    console.log(propertyID)
   }, [])
 
   return (
@@ -73,11 +73,11 @@ const PropertyPage = props => {
           <div className={classes.form}>
             <div className={classes.formHeader}>
               <Typography className={classes.heading} variant="h5" align="left">
-                <span><h2>${props.rate} </h2><h4>per night</h4></span>
+                <span><h2>${props.properties.price} </h2><h4>per night</h4></span>
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 <Star />
-                {props.rating}
+                {props.properties.price}
               </Typography>
             </div>
             <Divider />
@@ -94,9 +94,6 @@ const mapStateToProps = state => {
   return {
     properties: state.properties,
     isFetching: state.isFetching,
-    isPosting: state.isPosting,
-    isUpdating: state.isUpdating,
-    isDeleting: state.isDeleting,
     error: state.error
   };
 };

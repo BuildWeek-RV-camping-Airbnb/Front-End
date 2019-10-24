@@ -80,7 +80,6 @@ const reducer = (state = initialState, action) => {
         error: ''
       };
     case FETCH_SUCCESS_PROPERTY:
-      console.log('action..', action.payload)
       return {
         ...state,
         isFetching: false,
@@ -99,6 +98,7 @@ const reducer = (state = initialState, action) => {
         error: ''
       };
     case FETCH_SUCCESS_PROPERTY_PID:
+      console.log('ACTIONS', action.payload)
       return {
         ...state,
         isFetching: false,

@@ -65,7 +65,7 @@ export const getPropertiesByID = id => dispatch => {
   dispatch({ type: START_FETCHING_PROPERTY_PID });
   axiosWithAuth()
     .get(`/api/properties/${id}`)
-    .then(res =>
+    .then(res => 
       dispatch({ type: FETCH_SUCCESS_PROPERTY_PID, payload: res.data })
     )
     .catch(err =>
