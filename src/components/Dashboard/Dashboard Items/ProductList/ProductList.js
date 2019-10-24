@@ -55,6 +55,7 @@ const PropertyList = props => {
                 key={item.id}
                 id={item.id} 
                 propertyName={item.property_name}
+                description={item.description}
                 address={item.address}
                 city={item.city}
                 state={item.state}

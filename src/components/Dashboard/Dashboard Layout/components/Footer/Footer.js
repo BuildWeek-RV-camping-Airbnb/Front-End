@@ -18,11 +18,11 @@ const Footer = props => {
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <Typography variant="body1">
-        &copy;{' '}
+        Copyright &copy;{' '}
         <Link component="a" href="https://rvnb-app.com" target="_blank">
-          RVnB
-        </Link>
-        . 2019
+          RVnB, 
+        </Link>{' '}
+          2019
       </Typography>
       <Typography variant="caption">
         Created with love for the environment. By designers and developers who
