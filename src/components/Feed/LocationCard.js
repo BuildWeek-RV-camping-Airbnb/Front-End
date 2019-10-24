@@ -60,6 +60,8 @@ const LocationCard = props => {
 
   return (
     <Card className={classes.card}>
+      <Link href="https://rvnb.now.sh/properties/${props.id}" onClick={preventDefault} color="inherit" className={classes.link}>
+      {'color="inherit"'}
       <CardHeader
       />
       <CardMedia
@@ -90,6 +92,7 @@ const LocationCard = props => {
           <ShareIcon />
         </IconButton>
       </CardActions>
+      </Link>
     </Card>
     
   );
