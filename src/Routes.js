@@ -3,6 +3,7 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 
 import { RouteWithLayout, SignIn, SignUp } from './components';
 import { Main as MainLayout } from './components/Dashboard';
+import PrivateRoute from './PrivateRoute'
 import Feed from './components/Feed/Feed'
 
 
@@ -71,7 +72,7 @@ const Routes = () => {
         exact
         path='/signup'
       />
-      <Route
+      <PrivateRoute
         component={Feed}
         exact
         patch='/feed'
