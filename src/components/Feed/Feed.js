@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 
 // Components
 import LocationCard from './LocationCard';
@@ -14,9 +15,6 @@ import Footer from '../../components/Footer';
 import { getProperties } from '../../actions'
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        margin: '75px auto'
-    },
     gridItem: {
         padding: theme.spacing(2)
     },
@@ -24,18 +22,25 @@ const useStyles = makeStyles(theme => ({
       paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(8),
     },
+    heading:{
+      margin: 20,
+      marginTop: 50,
+    },
+    subheading:{
+      marginLeft: 20,
+    },
   }));
 
 const Feed = props => { 
   const classes = useStyles();
   // const topRated = props.location.filter(stars => stars.rating >= 4.8);
 
-  useEffect(() => {
+  // useEffect((props) => {
   
-    props.getProperties();
-    console.log('props...', props)
+  //   props.getProperties();
+  //   console.log('props...', props)
 
-  },[])
+  // },[])
 
   return (
     <div className="Feed">
@@ -43,10 +48,10 @@ const Feed = props => {
 
     {/* Cards unit */}
   <Container className={classes.cardGrid} maxWidth="md">
-    <Typography variant="h5" align="left" component="h2">
+    <Typography className={classes.heading} variant="h5" align="left" component="h2">
       Top-Rated Locations
     </Typography>
-    <Typography variant="body2" align="left" color="textSecondary" component="p">
+    <Typography className={classes.subheading}variant="body2" align="left" color="textSecondary" component="h3">
       Explore some of the best-reviewed stays in the world
     </Typography>
     {/* <Grid container spacing={4}>      
@@ -68,10 +73,10 @@ const Feed = props => {
       })}
     </Grid> */}
   </Container>
-
+  <Divider />
   <Container className={classes.cardGrid} maxWidth="md">
-    <Typography variant="h5" align="left" component="h2">
-      20+ places to stay
+    <Typography className={classes.heading} variant="h5" align="left" component="h2">
+      All Locations
     </Typography>
     <Grid container spacing={4}>      
       {props.properties.map(item => {

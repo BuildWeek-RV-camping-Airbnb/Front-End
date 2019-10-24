@@ -72,7 +72,7 @@ const SignUp = props => {
 
   const inputLabel = React.useRef(null);
 
-  const [values, setValues] = useState('');
+  const [values] = useState('');
   const [user, setUser] = useState({
     username: '',
     password: ''
