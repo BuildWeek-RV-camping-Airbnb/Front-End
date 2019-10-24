@@ -359,6 +359,9 @@ const PropertyCard = props => {
         <Typography variant="h5" align="left" component="h3">
           {props.propertyName}
         </Typography>
+        <Typography variant='body2' align="left" component="p">
+          {props.description}
+        </Typography>
         <Typography
           variant="body2"
           align="left"
