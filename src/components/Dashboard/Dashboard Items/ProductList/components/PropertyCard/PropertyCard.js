@@ -128,18 +128,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PropertyCard = props => {
+  console.log('Props.....', props)
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [editing, setEditing] = React.useState(false);
   const [propertyToEdit, setPropertyToEdit] = useState({
-    property_name: '',
-    description: '',
-    address: '',
-    city: '',
-    state: '',
-    image: '',
-    price: ''
+    id: props.id,
+    property_name: props.propertyName,
+    description: props.description,
+    address: props.address,
+    city: props.city,
+    state: props.state,
+    image: props.image,
+    price: props.price
   });
 
   const handleClick = event => {
@@ -152,6 +154,10 @@ const PropertyCard = props => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
   };
 
   const handleChanges = e => {
@@ -169,6 +175,7 @@ const PropertyCard = props => {
     console.log('Props Property...', { ...propertyToEdit, owner_id: userID });
     props.editProperty({ ...propertyToEdit, owner_id: userID });
     setPropertyToEdit('');
+    setOpen(false);
   };
 
   const deleteProperty = id => {
@@ -200,7 +207,7 @@ const PropertyCard = props => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
                 open={open}
-                onClose={handleClose}
+                onClose={handleCloseModal}
               >
                 <div style={modalStyle} className={classes.paper}>
                   <Avatar className={classes.avatar}>
@@ -337,7 +344,7 @@ const PropertyCard = props => {
       />
       <CardMedia
         className={classes.media}
-        image="https://unsplash.com/photos/zAjdgNXsMeg"
+        image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
         title="land"
       />
       <CardContent>
