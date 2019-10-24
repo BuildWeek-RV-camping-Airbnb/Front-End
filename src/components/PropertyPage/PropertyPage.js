@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,12 +7,22 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import { Avatar } from '@material-ui/core'
 
 // Components
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
-import DatePicker from '../../components/PropertyPage/DatePicker';
+import DatePicker from '../PropertyPage/DatePicker';
 import { getThemeProps } from '@material-ui/styles';
+import Star from '../../assets/icons/Star'
+
+// Actions
+import {
+  getUser,
+  getPropertiesByUserID,
+} from '../../actions'
+
+
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
@@ -27,12 +38,12 @@ const useStyles = makeStyles(theme => ({
     height: 60,
   },
   form:{
-    flexDirection: column,
+    flexDirection: 'column',
   }
 }));
 
 
-export default function PropertyPage() {
+const PropertyPage = props => {
   const classes = useStyles();
 
   return (
@@ -52,9 +63,6 @@ export default function PropertyPage() {
           </div>
         </Grid>
       <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />
-
-
-
         <Grid item xs={6}>
           <div className={classes.form}>
             <div className={classes.formHeader}>
@@ -71,9 +79,26 @@ export default function PropertyPage() {
           </div>
         </Grid>
       </Container>
-
-
       <Footer />
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    properties: state.properties,
+    isFetching: state.isFetching,
+    isPosting: state.isPosting,
+    isUpdating: state.isUpdating,
+    isDeleting: state.isDeleting,
+    error: state.error
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    getUser,
+    getPropertiesByUserID,
+  }
+)(PropertyPage);

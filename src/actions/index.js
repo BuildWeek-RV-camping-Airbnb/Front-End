@@ -9,6 +9,12 @@ export const START_FETCHING_PROPERTY = 'START_FETCHING_PROPERTY';
 export const FETCH_SUCCESS_PROPERTY = 'FETCH_SUCCESS_PROPERTY';
 export const FETCH_FAILURE_PROPERTY = 'FETCH_FAILURE_PROPERTY';
 
+// By Property ID
+export const START_FETCHING_PROPERTY_PID = 'START_FETCHING_PROPERTY_PID';
+export const FETCH_SUCCESS_PROPERTY_PID = 'FETCH_SUCCESS_PROPERTY_PID';
+export const FETCH_FAILURE_PROPERTY_PID = 'FETCH_FAILURE_PROPERTY_PID';
+
+// By User ID
 export const START_FETCHING_PROPERTY_ID = 'START_FETCHING_PROPERTY_ID';
 export const FETCH_SUCCESS_PROPERTY_ID = 'FETCH_SUCCESS_PROPERTY_ID';
 export const FETCH_FAILURE_PROPERTY_ID = 'FETCH_FAILURE_PROPERTY_ID';
@@ -52,6 +58,18 @@ export const getProperties = () => dispatch => {
     )
     .catch(err =>
       dispatch({ type: FETCH_FAILURE_PROPERTY, payload: err.response })
+    );
+};
+
+export const getPropertiesByID = id => dispatch => {
+  dispatch({ type: START_FETCHING_PROPERTY_PID });
+  axiosWithAuth()
+    .get(`/api/properties/${id}`)
+    .then(res =>
+      dispatch({ type: FETCH_SUCCESS_PROPERTY_PID, payload: res.data.properties })
+    )
+    .catch(err =>
+      dispatch({ type: FETCH_FAILURE_PROPERTY_PID, payload: err.response })
     );
 };
 

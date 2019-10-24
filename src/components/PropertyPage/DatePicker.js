@@ -1,6 +1,6 @@
 import 'date-fns';
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import { Grid, Button } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -8,6 +8,7 @@ import {
 } from '@material-ui/pickers';
 
 export default function DatePicker() {
+
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = date => {
@@ -43,7 +44,7 @@ export default function DatePicker() {
             'aria-label': 'change check-out date',
           }}
         />
-        <Button variant="contained" color="#F26E22" className={classes.button}>
+        <Button variant="contained" color="#F26E22">
         Reserve
       </Button>
       </Grid>
