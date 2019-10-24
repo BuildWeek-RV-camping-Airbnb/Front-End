@@ -68,7 +68,7 @@ const PropertyPage = props => {
 
           </div>
         </Grid>
-      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />
+      <Avatar alt={props.name} src={props.avatar} className={classes.bigAvatar} />
         <Grid item xs={6}>
           <div className={classes.form}>
             <div className={classes.formHeader}>
