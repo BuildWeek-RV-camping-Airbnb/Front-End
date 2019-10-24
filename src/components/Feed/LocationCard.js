@@ -52,19 +52,6 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     minHeight: 40
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)'
-  },
-  avatar: {
-    backgroundColor: 'red[500]'
   }
 }));
 
@@ -82,7 +69,7 @@ const LocationCard = props => {
       />
       <CardContent>
         <Typography variant="body2" align="left" color="textSecondary" component="p">
-          {props.city}, {props.state}       
+          {props.city}, {props.state}    
         </Typography>
           <Typography variant="h5" align="left" component="h3">
             {props.propertyName}
