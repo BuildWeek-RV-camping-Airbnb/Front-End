@@ -56,7 +56,7 @@ const Routes = () => {
         layout={MainLayout}
         path="/settings"
       /> */}
-      
+      {/* <Route component={PropertyPage} exact path='/property/:id' /> */}
       <Route component={SignIn} exact path="/signin" />
       <Route component={SignUp} exact path="/signup" />
       <PrivateRoute component={Feed} exact patch="/feed" />
