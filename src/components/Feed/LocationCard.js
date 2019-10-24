@@ -77,7 +77,7 @@ const LocationCard = props => {
       />
       <CardMedia
         className={classes.media}
-        image="https://unsplash.com/photos/gh7gMw7A-IA"
+        image={props.image}
         title="land"
       />
       <CardContent>

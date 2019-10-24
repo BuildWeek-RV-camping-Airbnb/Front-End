@@ -80,6 +80,7 @@ const Feed = props => {
             <LocationCard 
               key={item.id} 
               propertyName={item.property_name}
+              image={item.image}
               address={item.address}
               city={item.city}
               state={item.state}
