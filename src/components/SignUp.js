@@ -92,7 +92,7 @@ const SignUp = props => {
         localStorage.setItem('id', res.data.payload);
         localStorage.setItem('owner', res.data.payload);
         if(res.data.owner === true) {
-          props.history.push('/');
+          props.history.push('/propertylist');
         }
           else {
             props.history.push('/feed');
