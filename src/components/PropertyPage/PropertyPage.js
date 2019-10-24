@@ -6,14 +6,21 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 // Components
-imports NavBar from '../../components/NavBar';
+import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
+import DatePicker from '../../components/PropertyPage/DatePicker';
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
-    background: {props.image},
-  }
+    // background: {props.image},
+  },
+  cardGrid: {
 
+  },
+
+  form:{
+    flexDirection: column,
+  }
 }));
 
 
@@ -31,16 +38,19 @@ export default function PropertyPage() {
           {/* End hero unit */}
 
 
-        <Container className={classes.cardGrid} >
+      <Container className={classes.cardGrid} >
         <Grid item xs={6}>
-          <div className={classes.info} />
-        </Grid>
-        <Grid item xs={6}>
-          <div className={classes.form} />
+          <div className={classes.info}>
 
-          
+          </div>
         </Grid>
-        </Container>
+        <Grid item xs={6}>
+          <div className={classes.form}>
+            <
+            <DatePicker />
+          </div>
+        </Grid>
+      </Container>
 
 
       <Footer />
