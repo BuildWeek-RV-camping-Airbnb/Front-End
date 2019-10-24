@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { Link } from 'react-router-dom'
 import {
   Card,
   CardContent,
@@ -59,7 +60,7 @@ const LocationCard = props => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card}><Link to={`property/${props.id}`}>
       <CardHeader
       />
       <CardMedia
@@ -90,6 +91,7 @@ const LocationCard = props => {
           <ShareIcon />
         </IconButton>
       </CardActions>
+      </Link>
     </Card>
     
   );

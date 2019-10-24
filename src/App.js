@@ -10,8 +10,7 @@ import theme from './theme';
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      {/* <Routes /> */}
-      <PropertyPage />
+      <Routes />
     </ThemeProvider>
   );
 }
