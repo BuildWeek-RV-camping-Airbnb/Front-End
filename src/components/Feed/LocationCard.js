@@ -3,14 +3,11 @@ import { makeStyles } from '@material-ui/styles';
 import {
   Card,
   CardContent,
-  CardActions,
   Typography,
   CardHeader,
   CardMedia,
-  IconButton,
 } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import Link from '@material-ui/core/Link';
 import Star from '../../assets/icons/Star';
 
 const useStyles = makeStyles(theme => ({
@@ -59,9 +56,9 @@ const LocationCard = props => {
   const classes = useStyles();
 
   return (
+    <Link href="https://rvnb.now.sh/propertypage/${props.id}" onClick={preventDefault} color="inherit" className={classes.link}>
+    {'color="inherit"'}
     <Card className={classes.card}>
-      <Link href="https://rvnb.now.sh/properties/${props.id}" onClick={preventDefault} color="inherit" className={classes.link}>
-      {'color="inherit"'}
       <CardHeader
       />
       <CardMedia
@@ -88,13 +85,9 @@ const LocationCard = props => {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
       </CardActions>
-      </Link>
     </Card>
-    
+    </Link>
   );
 };
 
