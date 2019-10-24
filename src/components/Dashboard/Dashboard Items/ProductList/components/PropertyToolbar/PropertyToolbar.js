@@ -127,7 +127,9 @@ const PropertyToolbar = props => {
     console.log('Props Property...', { ...newProperty, owner_id: userID });
     props.postProperty({ ...newProperty, owner_id: userID });
     setNewProperty('');
+    setOpen(false);
   };
+  
 
   return (
     <div>

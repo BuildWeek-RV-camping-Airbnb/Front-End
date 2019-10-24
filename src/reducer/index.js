@@ -117,7 +117,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isPosting: false,
-        properties: action.payload
+        properties: [...state.properties, action.payload]
       };
     case POST_FAILURE_PROPERTY:
       return {
@@ -135,7 +135,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isUpdating: false,
-        properties: action.payload
+        properties: state.properties.map(property => {
+          if (property.id === action.payload.id) return action.payload
+          return property
+        })
       };
     case UPDATE_FAILURE:
       return {
@@ -153,6 +156,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isDeleting: false,
+        properties: state.properties.filter(property => {
+          return property.id !== action.payload.id
+        })
       };
     case DELETE_FAILURE:
       return {

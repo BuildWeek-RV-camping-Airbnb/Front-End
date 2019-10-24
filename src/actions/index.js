@@ -55,10 +55,10 @@ export const getProperties = () => dispatch => {
     );
 };
 
-export const getPropertiesByUserID = id => dispatch => {
+export const getPropertiesByUserID = owner_id => dispatch => {
   dispatch({ type: START_FETCHING_PROPERTY_ID });
   axiosWithAuth()
-    .get(`/api/properties/user/${id}`)
+    .get(`/api/properties/user/${owner_id}`)
     .then(res =>
       dispatch({
         type: FETCH_SUCCESS_PROPERTY_ID,
@@ -90,7 +90,7 @@ export const postProperty = newProperty => dispatch => {
     );
 };
 
-export const editProperty = (updateProperty) => dispatch => {
+export const editProperty = updateProperty => dispatch => {
   dispatch({ type: START_UPDATE });
   axiosWithAuth()
     .put(`/api/properties/${updateProperty.id}`, updateProperty)
