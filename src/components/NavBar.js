@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 // Material UI
 import { makeStyles, fade } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Badge, Hidden, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     boxShadow: 'none',
-    backgroundColor: '#034AA6'
+    backgroundColor: '#F26E22'
   },
   flexGrow: {
     flexGrow: 1
