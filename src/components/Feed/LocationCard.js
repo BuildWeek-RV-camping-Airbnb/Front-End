@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { Link } from 'react-router-dom'
 import {
   Card,
   CardContent,
@@ -56,9 +57,8 @@ const LocationCard = props => {
   const classes = useStyles();
 
   return (
-    <Link href="https://rvnb.now.sh/propertypage/${props.id}" onClick={preventDefault} color="inherit" className={classes.link}>
-    {'color="inherit"'}
-    <Card className={classes.card}>
+
+    <Card className={classes.card}><Link to={`property/${props.id}`}>
       <CardHeader
       />
       <CardMedia
@@ -86,6 +86,7 @@ const LocationCard = props => {
           <FavoriteIcon />
         </IconButton>
       </CardActions>
+      </Link>
     </Card>
     </Link>
   );

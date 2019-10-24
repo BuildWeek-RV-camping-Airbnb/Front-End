@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 
 // Material UI
@@ -19,7 +19,7 @@ import Star from '../../assets/icons/Star'
 // Actions
 import {
   getUser,
-  getPropertiesByUserID,
+  getPropertiesByID,
 } from '../../actions'
 
 
@@ -45,6 +45,12 @@ const useStyles = makeStyles(theme => ({
 
 const PropertyPage = props => {
   const classes = useStyles();
+
+  useEffect(() => {
+    const id = props.match.params.id;
+    props.getPropertiesByID(id)
+    console.log('Properties props...', props)
+  }, [])
 
   return (
     <div className="PropertyPage">
@@ -99,6 +105,6 @@ export default connect(
   mapStateToProps,
   {
     getUser,
-    getPropertiesByUserID,
+    getPropertiesByID,
   }
 )(PropertyPage);
