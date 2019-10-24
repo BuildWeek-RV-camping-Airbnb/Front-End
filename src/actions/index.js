@@ -90,12 +90,12 @@ export const postProperty = newProperty => dispatch => {
     );
 };
 
-export const editProperty = (updateProperty, id) => dispatch => {
+export const editProperty = (updateProperty) => dispatch => {
   dispatch({ type: START_UPDATE });
   axiosWithAuth()
-    .put(`/api/properties/${id}`, updateProperty)
+    .put(`/api/properties/${updateProperty.id}`, updateProperty)
     .then(res =>
-      dispatch({ type: UPDATE_SUCCESSFUL, payload: res.data.properties })
+      dispatch({ type: UPDATE_SUCCESSFUL, payload: updateProperty })
     )
     .catch(err => dispatch({ type: UPDATE_FAILURE, payload: err.response }));
 };

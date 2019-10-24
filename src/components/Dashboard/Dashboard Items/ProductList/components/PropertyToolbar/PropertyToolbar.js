@@ -265,7 +265,7 @@ const PropertyToolbar = props => {
       <div className={classes.row}>
         <SearchInput
           className={classes.searchInput}
-          placeholder="Search product"
+          placeholder="Search property"
         />
       </div>
     </div>
