@@ -4,14 +4,11 @@ import { Link } from 'react-router-dom'
 import {
   Card,
   CardContent,
-  CardActions,
   Typography,
   CardHeader,
   CardMedia,
-  IconButton,
 } from '@material-ui/core';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
+import Link from '@material-ui/core/Link';
 import Star from '../../assets/icons/Star';
 
 const useStyles = makeStyles(theme => ({
@@ -60,6 +57,7 @@ const LocationCard = props => {
   const classes = useStyles();
 
   return (
+
     <Card className={classes.card}><Link to={`property/${props.id}`}>
       <CardHeader
       />
@@ -87,13 +85,10 @@ const LocationCard = props => {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
       </CardActions>
       </Link>
     </Card>
-    
+    </Link>
   );
 };
 
