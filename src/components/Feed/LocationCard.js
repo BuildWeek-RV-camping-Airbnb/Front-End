@@ -59,7 +59,7 @@ const LocationCard = props => {
   const classes = useStyles();
 
   return (
-    <Link href="https://rvnb.now.sh/properties/${props.id}" onClick={preventDefault} color="inherit" className={classes.link}>
+    <Link href="https://rvnb.now.sh/propertypage/${props.id}" onClick={preventDefault} color="inherit" className={classes.link}>
     {'color="inherit"'}
     <Card className={classes.card}>
       <CardHeader
