@@ -8,6 +8,10 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { Avatar } from '@material-ui/core'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 // Components
 import NavBar from '../../components/NavBar';
@@ -27,7 +31,6 @@ import {
 const useStyles = makeStyles(theme => ({
   heroContent: {
     height: '40vh'
-    // background: {props.image},
   },
   cardGrid: {
 
@@ -57,18 +60,41 @@ const PropertyPage = props => {
       <NavBar />
 
         {/* Hero unit */}
-        <div className={classes.hero}>
+        <div className={classes.hero} backgroundImage={props.image}>
         </div>
-          {/* End hero unit */}
-
+        {/* End hero unit */}
 
       <Container className={classes.cardGrid} >
+
         <Grid item xs={6}>
           <div className={classes.info}>
+            <Avatar alt={props.name} src={props.avatar} className={classes.bigAvatar} />
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.firstName}
+            </Typography>
+            <Divider />
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.description}
+            </Typography>
 
+            <Grid item xs={12} md={6}>
+              <Typography className={classes.pos} color="textSecondary">
+                Amenities
+              </Typography>
+              <List dense={dense}>
+                {generate(
+                  <ListItem>
+                    <ListItemIcon>{AMENITIY ICON}</ListItemIcon>
+                    <ListItemText primary={AMENITIY}/>
+                  </ListItem>
+                )}
+              </List>
+            </Grid>
           </div>
         </Grid>
-      <Avatar alt={props.name} src={props.avatar} className={classes.bigAvatar} />
+
+
+
         <Grid item xs={6}>
           <div className={classes.form}>
             <div className={classes.formHeader}>
@@ -84,6 +110,7 @@ const PropertyPage = props => {
             <DatePicker />
           </div>
         </Grid>
+      
       </Container>
       <Footer />
     </div>
