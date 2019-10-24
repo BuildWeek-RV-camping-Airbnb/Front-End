@@ -58,7 +58,8 @@ const LocationCard = props => {
 
   return (
 
-    <Card className={classes.card}><Link to={`property/${props.id}`}>
+    <Card className={classes.card}>
+      <Link to={`property/${props.id}`}>
       <CardHeader
       />
       <CardMedia
@@ -88,7 +89,6 @@ const LocationCard = props => {
       </CardActions>
       </Link>
     </Card>
-    </Link>
   );
 };
 
