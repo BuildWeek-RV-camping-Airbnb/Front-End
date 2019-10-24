@@ -45,22 +45,22 @@ const Sidebar = props => {
   const pages = [
     {
       title: 'Dashboard',
-      href: '/dashboard',
+      href: '',
       icon: <DashboardIcon />
     },
     {
       title: 'Reservations',
-      href: '/users',
+      href: '',
       icon: <DateIcon />
     },
     {
       title: 'Properties',
-      href: '/products',
+      href: '/propertylist',
       icon: <MapIcon />
     },
     {
       title: 'Settings',
-      href: '/settings',
+      href: '',
       icon: <SettingsIcon />
     }
   ];
@@ -73,16 +73,10 @@ const Sidebar = props => {
       open={open}
       variant={variant}
     >
-      <div
-        {...rest}
-        className={clsx(classes.root, className)}
-      >
+      <div {...rest} className={clsx(classes.root, className)}>
         <Profile />
         <Divider className={classes.divider} />
-        <SidebarNav
-          className={classes.nav}
-          pages={pages}
-        />
+        <SidebarNav className={classes.nav} pages={pages} />
       </div>
     </Drawer>
   );

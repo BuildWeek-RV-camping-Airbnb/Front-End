@@ -86,15 +86,14 @@ const SignIn = props => {
     axiosWithAuth()
       .post('/api/users/login', user)
       .then(res => {
-        console.log('Res.data...', res.data)
+        console.log('Res.data...', res.data);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('id', res.data.id);
         localStorage.setItem('owner', res.data.owner);
-        if(res.data.owner === true) {
-          props.history.push('/');
-        }
-          else {
-            props.history.push('/feed');
+        if (res.data.owner === true) {
+          props.history.push('/propertylist');
+        } else {
+          props.history.push('/feed');
         }
       })
       .catch(err => console.log(err.response));
