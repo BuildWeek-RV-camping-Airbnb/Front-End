@@ -32,13 +32,17 @@ const useStyles = makeStyles(theme => ({
     width: '25rem',
     color: '#A4A4A4'
   },
-    heading:{
-      margin: 20,
-      marginTop: 50,
-    },
-    subheading:{
-      marginLeft: 20,
-    },
+  header: {
+      marginLeft: '5hw',
+      marginRight: '5hw',
+  },
+  heading: {
+    margin: 20,
+    marginTop: 50,
+  },
+  subheading: {
+    marginLeft: 20,
+  },
   }));
 
 const Feed = props => { 
@@ -55,42 +59,48 @@ const Feed = props => {
   return (
     <div className={classes.root}>
       <NavBar />
+
       <div className={classes.content}>
-      {/* <Container className={classes.cardGrid} maxWidth="md"> */}
-        <Typography className={classes.heading} variant="h5" align="left" component="h2">
+
+        <Container className={classes.header}>
+          <Typography className={classes.heading} variant="h5" align="left" component="h2">
             Top-Rated Locations
-        </Typography>
-        <Typography className={classes.subheading}variant="body2" align="left" color="textSecondary" component="h3">
-          Explore some of the best-reviewed stays in the world
-        </Typography>
+          </Typography>
+          <Typography className={classes.subheading}variant="body2" align="left" color="textSecondary" component="h3">
+            Explore some of the best-reviewed stays in the world
+          </Typography>
+        </Container>
+
         <Grid container spacing={4} justify="center">      
-          {/* {props.properties.map(item => {
-            return (
-              <Grid item className={classes.gridItem} s>
-                <LocationCard 
-                  key={item.id}
-                  id={item.id} 
-                  propertyName={item.property_name}
-                  description={item.description}
-                  address={item.address}
-                  city={item.city}
-                  state={item.state}
-                  price={item.price}
-                  rating={item.rating}
-                  ownerId={item.owner_id}
-                  />
-              </Grid>
-            );
-          })}*/}
-        </Grid> 
+            {/* {props.properties.map(item => {
+              return (
+                <Grid item className={classes.gridItem} s>
+                  <LocationCard 
+                    key={item.id}
+                    id={item.id} 
+                    propertyName={item.property_name}
+                    description={item.description}
+                    address={item.address}
+                    city={item.city}
+                    state={item.state}
+                    price={item.price}
+                    rating={item.rating}
+                    ownerId={item.owner_id}
+                    />
+                </Grid>
+              );
+            })}*/}
+          </Grid> 
 
         <Divider />
 
-        {/* <Container className={classes.cardGrid} maxWidth="md"> */}
-          <Typography className={classes.heading} variant="h5" align="left" component="h2">
-            All Locations
-          </Typography>
-          <Grid container spacing={4} justify="center">      
+        <Container className={classes.header}>
+            <Typography className={classes.heading} variant="h5" align="left" component="h2">
+              All Locations
+            </Typography>
+          </Container>
+
+        <Grid container spacing={4} justify="center">      
             {props.properties.map(item => {
               return (
                 <Grid item className={classes.gridItem} s>
@@ -110,15 +120,12 @@ const Feed = props => {
               );
             })}
           </Grid>
-      {/* </Container> */}
-
-    
-    {/* </Container> */}
-    </div>
-  <Footer />
 
     </div>
 
+    <Footer />
+
+    </div>
   );}
 const mapStateToProps = state => {
   return {
