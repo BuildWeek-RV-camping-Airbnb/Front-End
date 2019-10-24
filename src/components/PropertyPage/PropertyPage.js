@@ -21,7 +21,11 @@ const useStyles = makeStyles(theme => ({
   cardGrid: {
 
   },
-
+  bigAvatar: {
+    margin: 10,
+    width: 60,
+    height: 60,
+  },
   form:{
     flexDirection: column,
   }
@@ -47,6 +51,10 @@ export default function PropertyPage() {
 
           </div>
         </Grid>
+      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />
+
+
+
         <Grid item xs={6}>
           <div className={classes.form}>
             <div className={classes.formHeader}>
