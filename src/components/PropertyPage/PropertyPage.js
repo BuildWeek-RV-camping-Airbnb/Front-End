@@ -59,13 +59,14 @@ const PropertyPage = props => {
     <div className="PropertyPage">
       <NavBar />
 
-        {/* Hero unit */}
+    {/* Hero unit */}
         <div className={classes.hero} backgroundImage={props.image}>
         </div>
-        {/* End hero unit */}
+    {/* end Hero unit */}
 
       <Container className={classes.cardGrid} >
-
+        
+    {/* Left side */}
         <Grid item xs={6}>
           <div className={classes.info}>
             <Avatar alt={props.name} src={props.avatar} className={classes.bigAvatar} />
@@ -76,7 +77,9 @@ const PropertyPage = props => {
             <Typography variant="body2" color="textSecondary" component="p">
               {props.description}
             </Typography>
+    {/* end Left side */}
 
+    {/* Right side */}
             <Grid item xs={12} md={6}>
               <Typography className={classes.pos} color="textSecondary">
                 Amenities
@@ -90,6 +93,8 @@ const PropertyPage = props => {
                 )}
               </List>
             </Grid>
+    {/* end Right side */}
+
           </div>
         </Grid>
 
