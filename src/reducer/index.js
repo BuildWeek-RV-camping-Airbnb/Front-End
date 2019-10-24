@@ -8,6 +8,9 @@ import {
   START_FETCHING_PROPERTY,
   FETCH_SUCCESS_PROPERTY,
   FETCH_FAILURE_PROPERTY,
+  START_FETCHING_PROPERTY_PID,
+  FETCH_SUCCESS_PROPERTY_PID,
+  FETCH_FAILURE_PROPERTY_PID,
   START_FETCHING_PROPERTY_ID,
   FETCH_SUCCESS_PROPERTY_ID,
   FETCH_FAILURE_PROPERTY_ID,
@@ -84,6 +87,24 @@ const reducer = (state = initialState, action) => {
         properties: action.payload
       };
     case FETCH_FAILURE_PROPERTY:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload
+      };
+    case START_FETCHING_PROPERTY_PID:
+      return {
+        ...state,
+        isFetching: true,
+        error: ''
+      };
+    case FETCH_SUCCESS_PROPERTY_PID:
+      return {
+        ...state,
+        isFetching: false,
+        properties: action.payload
+      };
+    case FETCH_FAILURE_PROPERTY_PID:
       return {
         ...state,
         isFetching: false,
