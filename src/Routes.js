@@ -5,6 +5,7 @@ import { RouteWithLayout, SignIn, SignUp } from './components';
 import { Main as MainLayout } from './components/Dashboard';
 import PrivateRoute from './PrivateRoute';
 import Feed from './components/Feed/Feed';
+import PropertyPage from './components/PropertyPage/PropertyPage'
 
 import {
   Dashboard as DashboardView,
@@ -18,7 +19,7 @@ import {
 const Routes = () => {
   return (
     <Switch>
-      <Redirect exact from="/" to="/signin" />
+      <Redirect exact from="/" to="/signup" />
       <RouteWithLayout
         component={DashboardView}
         exact
@@ -55,6 +56,7 @@ const Routes = () => {
         layout={MainLayout}
         path="/settings"
       /> */}
+      <Route component={PropertyPage} exact path='/property/:id' />
       <Route component={SignIn} exact path="/signin" />
       <Route component={SignUp} exact path="/signup" />
       <PrivateRoute component={Feed} exact patch="/feed" />
