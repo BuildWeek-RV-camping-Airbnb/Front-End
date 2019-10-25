@@ -101,7 +101,7 @@ const Feed = props => {
           </Container>
 
         <Grid container spacing={4} justify="center">      
-            {props.properties.map(item => {
+            {props.properties && props.properties.map(item => {
               return (
                 <Grid item className={classes.gridItem} s>
                   <LocationCard 
