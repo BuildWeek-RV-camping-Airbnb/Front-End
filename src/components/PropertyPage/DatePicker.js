@@ -9,8 +9,9 @@ import {
 
 const useStyles = makeStyles(theme => ({
   submit: {
-    margin: theme.spacing(3, 0, 2),
-    backgroundColor: '#F26E22'
+    margin: theme.spacing(4, 2, 2),
+    backgroundColor: '#F26E22',
+    color: '#fff'
   },
 }))
 
