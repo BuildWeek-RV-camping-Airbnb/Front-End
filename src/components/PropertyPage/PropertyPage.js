@@ -5,12 +5,16 @@ import { connect } from 'react-redux'
 
 // Material UI
 import {
+    Container,
     Card,
     CardActions,
     CardContent,
     Button,
+    Grid,
     Typography,
-    makeStyles 
+    makeStyles, 
+    Divider,
+    Paper
  } from '@material-ui/core';
 
 // Actions
@@ -22,14 +26,37 @@ import {
 import Star from '../../assets/icons/Star'
 import NavBar from '../NavBar'
 import Footer from '../Footer'
+import DatePicker from './DatePicker'
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    margin: '75px auto'
-  },  
+    margin: '75px auto',
+    padding: theme.spacing(4)
+  },
+  heroImage: {
+    maxHeight: '50vh',
+    position: 'relative',
+    backgroundColor: theme.palette.grey[800],
+    color: theme.palette.common.white,
+    marginBottom: theme.spacing(4),
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    overflow: 'hidden'
+  },
   card: {
     minWidth: 275,
+    maxWidth: 275,
+  },
+  description: {
+    marginTop: 12,
+    marginBottom: 16,
+  },
+  amenities: {
+    marginTop: 12,
+    marginBottom: 16,
   },
   bullet: {
     display: 'inline-block',
@@ -41,8 +68,8 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12,
-  },
-});
+  }
+}));
 
 const PropertyPage = props => {
     const classes = useStyles();
@@ -55,28 +82,55 @@ const PropertyPage = props => {
 
   return (
     <div className={classes.root}>
+      <Container maxWidth='lg'>
         <NavBar />
-        <div className={classes.content}>
-        {/* // Reservation Card */}
-        <Card className={classes.card}>
-        <CardContent>
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
-            ${props.properties.price}/night
+        <main>
+        <Paper className={classes.heroImage}>
+        
+          <img
+            // style={{ display: 'none' }}
+            src='https://source.unsplash.com/user/erondu'
+            alt="background"
+          />
+        
+        </Paper>
+        <Grid container spacing={4}>
+          {/* // Reservation Card */}
+          <Grid item>
+            <Card className={classes.card}>
+              <CardContent>
+                  <Typography variant="h3" component="h3">
+                  ${props.properties.price}/night
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                  <Star />{props.properties.rating}
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                  </Typography>
+              </CardContent>
+                  <Divider />
+              <CardActions>
+                  <DatePicker /> 
+              </CardActions>
+              </Card>
+          </Grid>
+          {/* // End Reservation Card */}
+          <Grid className={classes.property} item md={6}>
+            <Typography>
+              <h1>{props.properties.property_name}</h1>
             </Typography>
-            <Typography variant="h5" component="h2">
+            <Typography variant='h6' color="textSecondary">
+              {props.properties.city}, {props.properties.state}
             </Typography>
-            <Typography className={classes.pos} color="textSecondary">
-            <Star />{props.properties.rating}
-            </Typography>
-            <Typography variant="body2" component="p">
-            </Typography>
-        </CardContent>
-        <CardActions>
-            <Button size="small">Learn More</Button>
-        </CardActions>
-        </Card>
-        {/* // End Reservation Card */}
-        </div> 
+            <Grid className={classes.description} item sm={6}>
+              <Typography variant='h5'>
+                {props.properties.description}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid> 
+        </main>
+      </Container>
     </div> // root 
   );
 }
