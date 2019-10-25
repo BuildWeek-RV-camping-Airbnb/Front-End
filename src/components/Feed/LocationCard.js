@@ -15,7 +15,7 @@ import Star from '../../assets/icons/Star';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: '0px'
+    // padding: '0px'
   },
   imageContainer: {
     height: 64,
@@ -43,8 +43,10 @@ const useStyles = makeStyles(theme => ({
   card: {
     minWidth: 365,
     maxWidth: 365,
-    minHeight: 430,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+  },
+  link: {
+    textDecoration: 'none'
   },
   media: {
     height: 0,
@@ -61,7 +63,7 @@ const LocationCard = props => {
   return (
 
     <Card className={classes.card}>
-      <Link to={`property/${props.id}`}>
+      <Link to={`property/${props.id}`} className={classes.link}>
       <CardHeader
       />
       <CardMedia
@@ -84,11 +86,6 @@ const LocationCard = props => {
           {props.rating}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          {/* <FavoriteIcon /> */}
-        </IconButton>
-      </CardActions>
       </Link>
     </Card>
   );
