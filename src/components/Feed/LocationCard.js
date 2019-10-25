@@ -68,18 +68,18 @@ const LocationCard = props => {
       />
       <CardMedia
         className={classes.media}
-        image={props.image}
+        image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
         title="land"
       />
       <CardContent>
         <Typography className={classes.cityState} variant="headline" align="left" color="textSecondary" component="subtitle1">
           {props.city}, {props.state}    
         </Typography>
-          <Typography className={classes.propertyName} variant="display2" align="left" color="black" component="h2" style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "pre" }}>
+          <Typography className={classes.propertyName} variant="display2" align="left" color="textPrimary" component="h2" style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "pre" }}>
             {props.propertyName}
           </Typography>
           <br/>
-        <Typography className={classes.price} variant="subheading" align="left" color="textSecondary" component="h2">
+        <Typography className={classes.price} variant="subheading" align="left" color="textSecondary" component="h3">
           ${props.price}/night
         </Typography>
         <Typography className={classes.rating} variant="subheading" align="right" color="textSecondary" component="h3">
