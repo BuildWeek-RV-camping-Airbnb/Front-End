@@ -72,17 +72,18 @@ const LocationCard = props => {
         title="land"
       />
       <CardContent>
-        <Typography variant="body2" align="left" color="textSecondary" component="p">
+        <Typography className={classes.cityState} variant="headline" align="left" color="textSecondary" component="subtitle1">
           {props.city}, {props.state}    
         </Typography>
-          <Typography variant="h5" align="left" component="h3">
+          <Typography className={classes.propertyName} variant="display2" align="left" color="black" component="h2" style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "pre" }}>
             {props.propertyName}
           </Typography>
-        <Typography variant="body2" align="left" color="textSecondary" component="p">
+          <br/>
+        <Typography className={classes.price} variant="subheading" align="left" color="textSecondary" component="h2">
           ${props.price}/night
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          <Star />
+        <Typography className={classes.rating} variant="subheading" align="right" color="textSecondary" component="h3">
+          <Star />{' '}
           {props.rating}
         </Typography>
       </CardContent>
