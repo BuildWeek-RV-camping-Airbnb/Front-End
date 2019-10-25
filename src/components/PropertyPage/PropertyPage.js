@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 
 // Material UI
@@ -7,13 +7,17 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import { Avatar } from '@material-ui/core'
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 // Components
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import DatePicker from '../PropertyPage/DatePicker';
-import { getThemeProps } from '@material-ui/styles';
+// import { getThemeProps } from '@material-ui/styles';
 import Star from '../../assets/icons/Star'
 
 // Actions
@@ -27,7 +31,6 @@ import {
 const useStyles = makeStyles(theme => ({
   heroContent: {
     height: '40vh'
-    // background: {props.image},
   },
   cardGrid: {
 
@@ -42,6 +45,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function generate(element) {
+  return (
+    props.amenities.map(value =>
+    React.cloneElement(element, {
+      key: value,
+    }))
+  );
+}
 
 const PropertyPage = props => {
   const classes = useStyles();
@@ -56,19 +67,47 @@ const PropertyPage = props => {
     <div className="PropertyPage">
       <NavBar />
 
-        {/* Hero unit */}
-        <div className={classes.hero}>
+    {/* Hero unit */}
+        <div className={classes.hero} backgroundImage={props.image}>
         </div>
-          {/* End hero unit */}
-
+    {/* end Hero unit */}
 
       <Container className={classes.cardGrid} >
+        
+    {/* Left side */}
         <Grid item xs={6}>
           <div className={classes.info}>
+            <Avatar alt={props.name} src={props.avatar} className={classes.bigAvatar} />
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.firstName}
+            </Typography>
+            <Divider />
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.description}
+            </Typography>
+    {/* end Left side */}
+
+    {/* Right side */}
+            <Grid item xs={12} md={6}>
+              <Typography className={classes.pos} color="textSecondary">
+                Amenities
+              </Typography>
+              <List>
+                {generate(
+                  <ListItem>
+                    <ListItemIcon>{props.icon}</ListItemIcon>
+                    <ListItemText primary={props.amenity}/>
+                  </ListItem>
+                )}
+              </List>
+            </Grid>
+    {/* end Right side */}
 
           </div>
         </Grid>
-      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />
+
+
+
         <Grid item xs={6}>
           <div className={classes.form}>
             <div className={classes.formHeader}>
@@ -84,6 +123,7 @@ const PropertyPage = props => {
             <DatePicker />
           </div>
         </Grid>
+      
       </Container>
       <Footer />
     </div>
