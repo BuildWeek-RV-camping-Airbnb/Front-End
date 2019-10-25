@@ -4,6 +4,6 @@ export { default as RouteWithLayout } from './RouteWithLayout';
 export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';
 export { default as Feed } from './Feed/Feed'
-export { default as PropertyPage } from './PropertyPage/Copy'
-export { default as LocationCard } from './Feed/LocationCard'
+export { default as PropertyPage } from './PropertyPage/PropertyPage'
+
 

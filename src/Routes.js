@@ -5,7 +5,7 @@ import { RouteWithLayout, SignIn, SignUp } from './components';
 import { Main as MainLayout } from './components/Dashboard';
 import PrivateRoute from './PrivateRoute';
 import Feed from './components/Feed/Feed';
-import PropertyPage from './components/PropertyPage/PropertyPage'
+
 
 import {
   Dashboard as DashboardView,
@@ -56,6 +56,7 @@ const Routes = () => {
         layout={MainLayout}
         path="/settings"
       /> */}
+
       <Route path='/property/:id' render={props => <PropertyPage {...props} /> } />
       <Route component={SignIn} exact path="/signin" />
       <Route component={SignUp} exact path="/signup" />
