@@ -3,12 +3,15 @@ import { makeStyles } from '@material-ui/styles';
 import { Link } from 'react-router-dom'
 import {
   Card,
+  CardActions,
   CardContent,
   Typography,
   CardHeader,
   CardMedia,
+  IconButton
 } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
+import FavoriteIcon  from '@material-ui/icons/Favorite'
+// import Link from '@material-ui/core/Link';
 import Star from '../../assets/icons/Star';
 
 const useStyles = makeStyles(theme => ({
@@ -88,7 +91,6 @@ const LocationCard = props => {
       </CardActions>
       </Link>
     </Card>
-    </Link>
   );
 };
 
