@@ -63,10 +63,10 @@ const Feed = props => {
       <div className={classes.content}>
 
         <Container className={classes.header}>
-          <Typography className={classes.heading} variant="h5" align="left" component="h2">
+          <Typography className={classes.heading} variant="display3" align="left" color="textSecondary" component="h1">
             Top-Rated Locations
           </Typography>
-          <Typography className={classes.subheading}variant="body2" align="left" color="textSecondary" component="h3">
+          <Typography className={classes.subheading}variant="display1" align="left" color="textSecondary" component="h4">
             Explore some of the best-reviewed stays in the world
           </Typography>
         </Container>
@@ -95,7 +95,7 @@ const Feed = props => {
         <Divider />
 
         <Container className={classes.header}>
-            <Typography className={classes.heading} variant="h5" align="left" component="h2">
+            <Typography className={classes.heading} variant="display3" align="left" color="textSecondary" component="h1">
               All Locations
             </Typography>
           </Container>

@@ -15,7 +15,7 @@ import Star from '../../assets/icons/Star';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: '0px'
+    // padding: '0px'
   },
   imageContainer: {
     height: 64,
@@ -43,8 +43,10 @@ const useStyles = makeStyles(theme => ({
   card: {
     minWidth: 365,
     maxWidth: 365,
-    minHeight: 430,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+  },
+  link: {
+    textDecoration: 'none'
   },
   media: {
     height: 0,
@@ -61,34 +63,30 @@ const LocationCard = props => {
   return (
 
     <Card className={classes.card}>
-      <Link to={`property/${props.id}`}>
+      <Link to={`property/${props.id}`} className={classes.link}>
       <CardHeader
       />
       <CardMedia
         className={classes.media}
-        image={props.image}
+        image="https://images.unsplash.com/photo-1547171761-eef8764f961e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1664&q=80"
         title="land"
       />
       <CardContent>
-        <Typography variant="body2" align="left" color="textSecondary" component="p">
+        <Typography className={classes.cityState} variant="headline" align="left" color="textSecondary" component="subtitle1">
           {props.city}, {props.state}    
         </Typography>
-          <Typography variant="h5" align="left" component="h3">
+          <Typography className={classes.propertyName} variant="display2" align="left" color="textPrimary" component="h2" style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "pre" }}>
             {props.propertyName}
           </Typography>
-        <Typography variant="body2" align="left" color="textSecondary" component="p">
+          <br/>
+        <Typography className={classes.price} variant="subheading" align="left" color="textSecondary" component="h3">
           ${props.price}/night
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          <Star />
+        <Typography className={classes.rating} variant="subheading" align="right" color="textSecondary" component="h3">
+          <Star />{' '}
           {props.rating}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          {/* <FavoriteIcon /> */}
-        </IconButton>
-      </CardActions>
       </Link>
     </Card>
   );
