@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
 
 // Material UI
@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import { Avatar } from '@material-ui/core'
+import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -17,7 +17,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import DatePicker from '../PropertyPage/DatePicker';
-import { getThemeProps } from '@material-ui/styles';
+// import { getThemeProps } from '@material-ui/styles';
 import Star from '../../assets/icons/Star'
 
 // Actions
@@ -45,6 +45,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+function generate(element) {
+  return (
+    props.amenities.map(value =>
+    React.cloneElement(element, {
+      key: value,
+    }))
+  );
+}
 
 const PropertyPage = props => {
   const classes = useStyles();
@@ -84,11 +92,11 @@ const PropertyPage = props => {
               <Typography className={classes.pos} color="textSecondary">
                 Amenities
               </Typography>
-              <List dense={dense}>
+              <List>
                 {generate(
                   <ListItem>
-                    <ListItemIcon>{AMENITIY ICON}</ListItemIcon>
-                    <ListItemText primary={AMENITIY}/>
+                    <ListItemIcon>{props.icon}</ListItemIcon>
+                    <ListItemText primary={props.amenity}/>
                   </ListItem>
                 )}
               </List>

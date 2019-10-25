@@ -7,8 +7,9 @@ import {
   Typography,
   CardHeader,
   CardMedia,
+  CardActions,
+  IconButton,
 } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
 import Star from '../../assets/icons/Star';
 
 const useStyles = makeStyles(theme => ({
@@ -84,7 +85,7 @@ const LocationCard = props => {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          {/* <FavoriteIcon /> */}
         </IconButton>
       </CardActions>
       </Link>
