@@ -74,8 +74,12 @@ const SignUp = props => {
 
   const [values] = useState('');
   const [user, setUser] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
     username: '',
-    password: ''
+    password: '',
+    owner: '',
   });
 
   const handleChanges = e => {
@@ -84,10 +88,10 @@ const SignUp = props => {
 
   const signUp = e => {
     e.preventDefault();
+    console.log(user);
     axiosWithAuth()
       .post('/api/users', user)
       .then(res => {
-        console.log(res.data);
         localStorage.setItem('token', res.data.payload);
         localStorage.setItem('id', res.data.payload);
         localStorage.setItem('owner', res.data.payload);
@@ -118,11 +122,11 @@ const SignUp = props => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="fname"
-                  name="firstName"
+                  name="first_name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="firstName"
+                  id="first_name"
                   label="First Name"
                   autoFocus
                   onChange={handleChanges}
@@ -133,9 +137,9 @@ const SignUp = props => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="lastName"
+                  id="last_name"
                   label="Last Name"
-                  name="lastName"
+                  name="last_name"
                   autoComplete="lname"
                   onChange={handleChanges}
                 />
@@ -179,22 +183,23 @@ const SignUp = props => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl variant="outlined">
+                <FormControl
+                    variant="outlined" >
                   <InputLabel
                     ref={inputLabel}
                     htmlFor="outlined-category-simple">
                     I am a ...
                   </InputLabel>
                   <Select
-                    value={values.category}
+                    value={values.owner}
                     onChange={handleChanges}
                     // labelWidth={classes.form}
                     inputProps={{
-                      name: 'category',
-                      id: 'outlined-category-simple'
+                      name: 'owner',
+                      id: 'owner'
                     }}
                   >
-                    <MenuItem value="">
+                    <MenuItem>
                       <em>Select</em>
                     </MenuItem>
                     <MenuItem value={false}>RV Owner</MenuItem>

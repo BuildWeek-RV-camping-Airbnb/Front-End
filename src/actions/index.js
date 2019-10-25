@@ -43,7 +43,8 @@ export const getUser = id => dispatch => {
   dispatch({ type: START_FETCHING_USER });
   axiosWithAuth()
     .get(`/api/users/${id}`)
-    .then(res => dispatch({ type: FETCH_SUCCESS_USER, payload: res.data }))
+    .then(res => console.log('User data...', res.data))
+      // dispatch({ type: FETCH_SUCCESS_USER, payload: res.data }))
     .catch(err =>
       dispatch({ type: FETCH_FAILURE_USER, payload: err.response })
     );
@@ -92,7 +93,8 @@ export const postUser = newUser => dispatch => {
   dispatch({ type: START_POST_USER });
   axiosWithAuth()
     .post(`/api/users`, newUser)
-    .then(res => dispatch({ type: POST_SUCCESS_USER, payload: res.data.users }))
+    .then(res => console.log(res.data))
+      // dispatch({ type: POST_SUCCESS_USER, payload: res.data }))
     .catch(err => dispatch({ type: POST_FAILURE_USER, payload: err.response }));
 };
 
