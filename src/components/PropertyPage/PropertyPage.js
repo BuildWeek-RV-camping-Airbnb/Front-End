@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect} from 'react';
+
+// Redux
 import { connect } from 'react-redux'
 
 // Material UI
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-
-// Components
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
-import DatePicker from '../PropertyPage/DatePicker';
-// import { getThemeProps } from '@material-ui/styles';
-import Star from '../../assets/icons/Star'
+import {
+    Card,
+    CardActions,
+    CardContent,
+    Button,
+    Typography,
+    makeStyles 
+ } from '@material-ui/core';
 
 // Actions
 import {
@@ -26,122 +19,80 @@ import {
   getPropertiesByID,
 } from '../../actions'
 
+import Star from '../../assets/icons/Star'
+import NavBar from '../NavBar'
+import Footer from '../Footer'
 
-
-const useStyles = makeStyles(theme => ({
-  heroContent: {
-    height: '40vh'
+const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+    margin: '75px auto'
+  },  
+  card: {
+    minWidth: 275,
   },
-  cardGrid: {
-
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
   },
-  bigAvatar: {
-    margin: 10,
-    width: 60,
-    height: 60,
+  title: {
+    fontSize: 14,
   },
-  form:{
-    flexDirection: 'column',
-  }
-}));
-
-function generate(element) {
-  return (
-    props.amenities.map(value =>
-    React.cloneElement(element, {
-      key: value,
-    }))
-  );
-}
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 const PropertyPage = props => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  useEffect(() => {
-    const propertyID = props.match.params.id;
-    props.getPropertiesByID(propertyID)
-    console.log(propertyID)
-  }, [])
+    useEffect(() => {
+        const propertyID = props.match.params.id;
+        props.getPropertiesByID(propertyID)
+        console.log(propertyID)
+    }, [])
 
   return (
-    <div className="PropertyPage">
-      <NavBar />
-
-    {/* Hero unit */}
-        <div className={classes.hero} backgroundImage={props.image}>
-        </div>
-    {/* end Hero unit */}
-
-      <Container className={classes.cardGrid} >
-        
-    {/* Left side */}
-        <Grid item xs={6}>
-          <div className={classes.info}>
-            <Avatar alt={props.name} src={props.avatar} className={classes.bigAvatar} />
-            <Typography variant="body2" color="textSecondary" component="p">
-              {props.firstName}
+    <div className={classes.root}>
+        <NavBar />
+        <div className={classes.content}>
+        {/* // Reservation Card */}
+        <Card className={classes.card}>
+        <CardContent>
+            <Typography className={classes.title} color="textSecondary" gutterBottom>
+            ${props.properties.price}/night
             </Typography>
-            <Divider />
-            <Typography variant="body2" color="textSecondary" component="p">
-              {props.description}
+            <Typography variant="h5" component="h2">
             </Typography>
-    {/* end Left side */}
-
-    {/* Right side */}
-            <Grid item xs={12} md={6}>
-              <Typography className={classes.pos} color="textSecondary">
-                Amenities
-              </Typography>
-              <List>
-                {generate(
-                  <ListItem>
-                    <ListItemIcon>{props.icon}</ListItemIcon>
-                    <ListItemText primary={props.amenity}/>
-                  </ListItem>
-                )}
-              </List>
-            </Grid>
-    {/* end Right side */}
-
-          </div>
-        </Grid>
-
-
-
-        <Grid item xs={6}>
-          <div className={classes.form}>
-            <div className={classes.formHeader}>
-              <Typography className={classes.heading} variant="h5" align="left">
-                <span><h2>${props.properties.price} </h2><h4>per night</h4></span>
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                <Star />
-                {props.properties.price}
-              </Typography>
-            </div>
-            <Divider />
-            <DatePicker />
-          </div>
-        </Grid>
-      
-      </Container>
-      <Footer />
-    </div>
+            <Typography className={classes.pos} color="textSecondary">
+            <Star />{props.properties.rating}
+            </Typography>
+            <Typography variant="body2" component="p">
+            </Typography>
+        </CardContent>
+        <CardActions>
+            <Button size="small">Learn More</Button>
+        </CardActions>
+        </Card>
+        {/* // End Reservation Card */}
+        </div> 
+    </div> // root 
   );
 }
 
 const mapStateToProps = state => {
-  return {
-    properties: state.properties,
-    isFetching: state.isFetching,
-    error: state.error
+    return {
+      properties: state.properties,
+      isFetching: state.isFetching,
+      error: state.error
+    };
   };
-};
-
-export default connect(
-  mapStateToProps,
-  {
-    getUser,
-    getPropertiesByID,
-  }
-)(PropertyPage);
+  
+  export default connect(
+    mapStateToProps,
+    {
+      getUser,
+      getPropertiesByID,
+    }
+  )(PropertyPage);
