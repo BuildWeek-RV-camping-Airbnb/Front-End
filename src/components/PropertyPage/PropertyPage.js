@@ -1,71 +1,152 @@
-import React from 'react';
+import React, { useEffect} from 'react';
+
+// Redux
+import { connect } from 'react-redux'
 
 // Material UI
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import {
+    Container,
+    Card,
+    CardActions,
+    CardContent,
+    Button,
+    Grid,
+    Typography,
+    makeStyles, 
+    Divider,
+    Paper
+ } from '@material-ui/core';
 
-// Components
-import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer';
-import DatePicker from '../../components/PropertyPage/DatePicker';
-import { getThemeProps } from '@material-ui/styles';
+// Actions
+import {
+  getUser,
+  getPropertiesByID,
+} from '../../actions'
+
+import Star from '../../assets/icons/Star'
+import NavBar from '../NavBar'
+import Footer from '../Footer'
+import DatePicker from './DatePicker'
+
 
 const useStyles = makeStyles(theme => ({
-  heroContent: {
-    height: '40vh'
-    // background: {props.image},
+  root: {
+    flexGrow: 1,
+    margin: '75px auto',
+    padding: theme.spacing(4)
   },
-  cardGrid: {
-
+  heroImage: {
+    maxHeight: '50vh',
+    position: 'relative',
+    backgroundColor: theme.palette.grey[800],
+    color: theme.palette.common.white,
+    marginBottom: theme.spacing(4),
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    overflow: 'hidden'
   },
-
-  form:{
-    flexDirection: column,
+  card: {
+    minWidth: 275,
+    maxWidth: 275,
+  },
+  description: {
+    marginTop: 12,
+    marginBottom: 16,
+  },
+  amenities: {
+    marginTop: 12,
+    marginBottom: 16,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
   }
 }));
 
+const PropertyPage = props => {
+    const classes = useStyles();
 
-export default function PropertyPage() {
-  const classes = useStyles();
+    useEffect(() => {
+        const propertyID = props.match.params.id;
+        props.getPropertiesByID(propertyID)
+        console.log(propertyID)
+    }, [])
 
   return (
-    <div className="PropertyPage">
-      <NavBar />
-
-        {/* Hero unit */}
-        <div className={classes.hero}>
-        </div>
-          {/* End hero unit */}
-
-
-      <Container className={classes.cardGrid} >
-        <Grid item xs={6}>
-          <div className={classes.info}>
-
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <div className={classes.form}>
-            <div className={classes.formHeader}>
-              <Typography className={classes.heading} variant="h5" align="left">
-                <span><h2>${props.rate} </h2><h4>per night</h4></span>
+    <div className={classes.root}>
+      <Container maxWidth='lg'>
+        <NavBar />
+        <main>
+        <Paper className={classes.heroImage}>
+        
+          <img
+            // style={{ display: 'none' }}
+            src='https://source.unsplash.com/user/erondu'
+            alt="background"
+          />
+        
+        </Paper>
+        <Grid container spacing={4}>
+          {/* // Reservation Card */}
+          <Grid item>
+            <Card className={classes.card}>
+              <CardContent>
+                  <Typography variant="h3" component="h3">
+                  ${props.properties.price}/night
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                  <Star />{props.properties.rating}
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                  </Typography>
+              </CardContent>
+                  <Divider />
+              <CardActions>
+                  <DatePicker /> 
+              </CardActions>
+              </Card>
+          </Grid>
+          {/* // End Reservation Card */}
+          <Grid className={classes.property} item md={6}>
+            <Typography>
+              <h1>{props.properties.property_name}</h1>
+            </Typography>
+            <Typography variant='h6' color="textSecondary">
+              {props.properties.city}, {props.properties.state}
+            </Typography>
+            <Grid className={classes.description} item sm={6}>
+              <Typography variant='h5'>
+                {props.properties.description}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                <Star />
-                {props.rating}
-              </Typography>
-            </div>
-            <Divider />
-            <DatePicker />
-          </div>
-        </Grid>
+            </Grid>
+          </Grid>
+        </Grid> 
+        </main>
       </Container>
-
-
-      <Footer />
-    </div>
+    </div> // root 
   );
 }
+
+const mapStateToProps = state => {
+    return {
+      properties: state.properties,
+      isFetching: state.isFetching,
+      error: state.error
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    {
+      getUser,
+      getPropertiesByID,
+    }
+  )(PropertyPage);

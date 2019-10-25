@@ -9,6 +9,12 @@ export const START_FETCHING_PROPERTY = 'START_FETCHING_PROPERTY';
 export const FETCH_SUCCESS_PROPERTY = 'FETCH_SUCCESS_PROPERTY';
 export const FETCH_FAILURE_PROPERTY = 'FETCH_FAILURE_PROPERTY';
 
+// By Property ID
+export const START_FETCHING_PROPERTY_PID = 'START_FETCHING_PROPERTY_PID';
+export const FETCH_SUCCESS_PROPERTY_PID = 'FETCH_SUCCESS_PROPERTY_PID';
+export const FETCH_FAILURE_PROPERTY_PID = 'FETCH_FAILURE_PROPERTY_PID';
+
+// By User ID
 export const START_FETCHING_PROPERTY_ID = 'START_FETCHING_PROPERTY_ID';
 export const FETCH_SUCCESS_PROPERTY_ID = 'FETCH_SUCCESS_PROPERTY_ID';
 export const FETCH_FAILURE_PROPERTY_ID = 'FETCH_FAILURE_PROPERTY_ID';
@@ -37,7 +43,8 @@ export const getUser = id => dispatch => {
   dispatch({ type: START_FETCHING_USER });
   axiosWithAuth()
     .get(`/api/users/${id}`)
-    .then(res => dispatch({ type: FETCH_SUCCESS_USER, payload: res.data }))
+    .then(res => console.log('User data...', res.data))
+      // dispatch({ type: FETCH_SUCCESS_USER, payload: res.data }))
     .catch(err =>
       dispatch({ type: FETCH_FAILURE_USER, payload: err.response })
     );
@@ -52,6 +59,18 @@ export const getProperties = () => dispatch => {
     )
     .catch(err =>
       dispatch({ type: FETCH_FAILURE_PROPERTY, payload: err.response })
+    );
+};
+
+export const getPropertiesByID = id => dispatch => {
+  dispatch({ type: START_FETCHING_PROPERTY_PID });
+  axiosWithAuth()
+    .get(`/api/properties/${id}`)
+    .then(res => 
+      dispatch({ type: FETCH_SUCCESS_PROPERTY_PID, payload: res.data })
+    )
+    .catch(err =>
+      dispatch({ type: FETCH_FAILURE_PROPERTY_PID, payload: err.response })
     );
 };
 
@@ -74,7 +93,8 @@ export const postUser = newUser => dispatch => {
   dispatch({ type: START_POST_USER });
   axiosWithAuth()
     .post(`/api/users`, newUser)
-    .then(res => dispatch({ type: POST_SUCCESS_USER, payload: res.data.users }))
+    .then(res => console.log(res.data))
+      // dispatch({ type: POST_SUCCESS_USER, payload: res.data }))
     .catch(err => dispatch({ type: POST_FAILURE_USER, payload: err.response }));
 };
 

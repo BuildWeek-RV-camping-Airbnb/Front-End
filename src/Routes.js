@@ -57,6 +57,7 @@ const Routes = () => {
         path="/settings"
       /> */}
 
+      <Route path='/property/:id' render={props => <PropertyPage {...props} /> } />
       <Route component={SignIn} exact path="/signin" />
       <Route component={SignUp} exact path="/signup" />
       <PrivateRoute component={Feed} exact patch="/feed" />
