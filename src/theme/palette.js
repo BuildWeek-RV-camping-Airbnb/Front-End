@@ -2,10 +2,16 @@ import { colors } from '@material-ui/core';
 
 const white = '#FFFFFF';
 const black = '#000000';
+const orange = '#F26E22';
+const blue = '#F26E22';
+const green = '#56A662';
 
 export default {
   black,
   white,
+  orange,
+  blue,
+  green,
   primary: {
     contrastText: white,
     dark: colors.indigo[900],

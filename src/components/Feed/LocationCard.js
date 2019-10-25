@@ -8,10 +8,12 @@ import {
   Typography,
   CardHeader,
   CardMedia,
-  IconButton
-} from '@material-ui/core';
+
 import FavoriteIcon  from '@material-ui/icons/Favorite'
 // import Link from '@material-ui/core/Link';
+  CardActions,
+  IconButton,
+} from '@material-ui/core';
 import Star from '../../assets/icons/Star';
 
 const useStyles = makeStyles(theme => ({
@@ -61,7 +63,8 @@ const LocationCard = props => {
 
   return (
 
-    <Card className={classes.card}><Link to={`property/${props.id}`}>
+    <Card className={classes.card}>
+      <Link to={`property/${props.id}`}>
       <CardHeader
       />
       <CardMedia
@@ -86,7 +89,7 @@ const LocationCard = props => {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          {/* <FavoriteIcon /> */}
         </IconButton>
       </CardActions>
       </Link>
